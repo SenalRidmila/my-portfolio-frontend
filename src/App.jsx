@@ -102,7 +102,7 @@ function App() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://localhost:8000/tools/img-to-pdf", {
+      const response = await fetch("https://my-portfolio-backend-mst1.onrender.com/tools/img-to-pdf", {
         method: "POST",
         body: formData,
       });
@@ -134,7 +134,7 @@ function App() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://localhost:8000/tools/pdf-to-word", {
+      const response = await fetch("https://my-portfolio-backend-mst1.onrender.com/tools/pdf-to-word", {
         method: "POST",
         body: formData,
       });
@@ -167,7 +167,7 @@ function App() {
     setIsTyping(true);
 
     try {
-      const response = await fetch("http://localhost:8000/chat", {
+      const response = await fetch("https://my-portfolio-backend-mst1.onrender.com/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: chatInput }),
