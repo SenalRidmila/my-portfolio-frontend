@@ -370,7 +370,6 @@ function App() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">🚀 Developer Tools</h2>
-            <p className={`text-lg ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Free utilities powered by Python Backend.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className={`p-8 rounded-2xl border text-center transition hover:-translate-y-2 ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200 shadow-xl'}`}>
