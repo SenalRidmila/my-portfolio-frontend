@@ -51,3 +51,11 @@ body {
 .animation-delay-2000 {
   animation-delay: 2s;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #0f172a; /* Dark Blue-Black Background */
+  color: white;
+}

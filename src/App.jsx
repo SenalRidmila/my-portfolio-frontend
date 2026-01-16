@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-
 import profileImg from './assets/profile.png';
 import petShopImg from './assets/pet-shop.png';
 import sltTireImg from './assets/slt-tire.png';
@@ -185,8 +184,8 @@ function App() {
   return (
     <div className={`min-h-screen transition-colors duration-300 font-sans ${isDarkMode ? 'bg-dark text-white' : 'bg-gray-50 text-gray-900'}`}>
       
-      {/* Navbar (Updated with glass-nav class) */}
-      <nav className={`glass-nav ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+      {/* Navbar */}
+      <nav className={`fixed w-full z-40 backdrop-blur-md border-b ${isDarkMode ? 'bg-black/50 border-gray-800 text-white' : 'bg-white/50 border-gray-200 text-gray-900'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div onClick={() => scrollToSection('home')} className="text-xl font-bold flex items-center gap-2 cursor-pointer select-none">
             <span className="text-blue-500 text-2xl">⚡</span> <span>Senal.dev</span>
@@ -207,7 +206,7 @@ function App() {
           </div>
         </div>
         {isMenuOpen && (
-          <div className={`md:hidden p-4 absolute w-full border-b shadow-xl ${isDarkMode ? 'bg-dark border-gray-700' : 'bg-white border-gray-200'}`}>
+          <div className={`md:hidden p-4 absolute w-full border-b shadow-xl ${isDarkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'}`}>
             <ul className="flex flex-col gap-4 text-center">
               {['Home', 'About', 'Projects', 'Tools', 'Contact'].map((item) => (
                 <li key={item} onClick={() => scrollToSection(item.toLowerCase())} className="cursor-pointer hover:text-blue-500 font-medium py-2">{item}</li>
@@ -217,27 +216,35 @@ function App() {
         )}
       </nav>
 
-      {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-6">
-        <div className="max-w-7xl w-full grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 text-center md:text-left order-2 md:order-1">
-            <h2 className="text-blue-500 font-bold tracking-wide uppercase">Hello, I'm</h2>
-            <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">{personalInfo.name}</h1>
-            <h3 className={`text-2xl md:text-3xl font-semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Full Stack Developer</h3>
-            <p className={`text-lg max-w-lg mx-auto md:mx-0 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-               {personalInfo.title} at Horizon Campus. Expert in building scalable web solutions with Java, React, and Cloud Technologies.
-            </p>
-            <div className="flex gap-4 justify-center md:justify-start pt-4">
-              <button onClick={() => scrollToSection('tools')} className="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition shadow-lg">Try My Tools</button>
-              <button onClick={() => scrollToSection('contact')} className={`px-8 py-3 rounded-lg font-bold border transition ${isDarkMode ? 'border-white hover:bg-white hover:text-black' : 'border-black hover:bg-black hover:text-white'}`}>Contact Me</button>
-            </div>
-          </div>
-          <div className="flex justify-center order-1 md:order-2">
-             <div className="relative w-72 h-72 md:w-96 md:h-96 group">
-                <div className="absolute inset-0 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-                <img src={profileImg} alt="Senal" className="relative w-full h-full object-cover rounded-full border-4 border-blue-500 shadow-2xl" />
-             </div>
-          </div>
+      {/* Hero Section (Updated with Modern Design) */}
+      <section id="home" className="min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20 bg-gradient-to-b from-[#0f172a] via-[#1e293b] to-[#0f172a]">
+        
+        {/* Profile Image with Glow */}
+        <div className="relative mb-6 group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000"></div>
+          <img 
+            src={profileImg} 
+            alt="Senal Ridmila" 
+            className="relative w-40 h-40 rounded-full border-4 border-gray-800 object-cover shadow-2xl transform transition hover:scale-105"
+          />
+        </div>
+
+        {/* Name & Title */}
+        <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500 mb-4">
+          {personalInfo.name}
+        </h1>
+        <p className="text-xl md:text-2xl text-gray-400 mb-8 font-light max-w-2xl">
+          Full Stack Developer | AI Enthusiast | Undergraduate
+        </p>
+
+        {/* Buttons */}
+        <div className="flex gap-4">
+          <button onClick={() => scrollToSection('projects')} className="px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold transition shadow-lg shadow-blue-500/30">
+            View Projects
+          </button>
+          <a href={personalInfo.github} target="_blank" rel="noreferrer" className="px-8 py-3 rounded-full border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white transition">
+            GitHub
+          </a>
         </div>
       </section>
 
@@ -343,11 +350,11 @@ function App() {
                   {project.desc}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
-                   {project.tech.split(',').map((tag, i) => (
-                     <span key={i} className={`text-xs px-2 py-1 rounded border font-mono ${isDarkMode ? 'bg-gray-800 border-gray-600 text-blue-300' : 'bg-blue-50 border-blue-100 text-blue-600'}`}>
-                       {tag.trim()}
-                     </span>
-                   ))}
+                    {project.tech.split(',').map((tag, i) => (
+                      <span key={i} className={`text-xs px-2 py-1 rounded border font-mono ${isDarkMode ? 'bg-gray-800 border-gray-600 text-blue-300' : 'bg-blue-50 border-blue-100 text-blue-600'}`}>
+                        {tag.trim()}
+                      </span>
+                    ))}
                 </div>
                 <div className="flex gap-3 mt-auto">
                   {project.github && (
@@ -432,41 +439,65 @@ function App() {
         </div>
       </section>
 
-      {/* Floating Chatbot Widget */}
-      <div className="fixed bottom-8 right-8 z-50">
+      {/* Modern Glassmorphism Chatbot Widget */}
+      <div className="fixed bottom-5 right-5 z-50">
         {isChatOpen && (
-          <div className={`mb-4 w-80 md:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col border ${isDarkMode ? 'bg-card border-gray-700' : 'bg-white border-gray-200'}`}>
-            <div className="bg-blue-600 p-4 text-white font-bold flex justify-between items-center">
-              <span>🤖 Senal's AI</span>
-              <button onClick={() => setIsChatOpen(false)}>✕</button>
+          <div className="mb-4 w-96 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            
+            {/* Header */}
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">🤖</span>
+                <h3 className="font-bold text-white">Senal's AI Assistant</h3>
+              </div>
+              <button onClick={() => setIsChatOpen(false)} className="text-white hover:text-gray-200">✕</button>
             </div>
-            <div className={`h-80 p-4 overflow-y-auto space-y-3 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
-              {chatMessages.map((msg, i) => (
-                <div key={i} className={`p-3 rounded-lg max-w-[85%] text-sm ${msg.role === 'user' ? 'bg-blue-600 text-white self-end ml-auto rounded-br-none' : 'bg-gray-700 text-gray-200 self-start rounded-tl-none'}`}>
+
+            {/* Chat Body */}
+            <div className="h-80 overflow-y-auto p-4 space-y-3 bg-black/40">
+              {chatMessages.map((msg, index) => (
+                <div key={index} className={`p-3 rounded-lg max-w-[85%] text-sm ${
+                  msg.role === "user" 
+                    ? "bg-blue-600 ml-auto text-white rounded-br-none" 
+                    : "bg-gray-700 mr-auto text-gray-200 rounded-bl-none"
+                }`}>
                   {msg.text}
                 </div>
               ))}
-              {isTyping && <div className="text-xs text-gray-500 animate-pulse">AI is typing...</div>}
+              {isTyping && <div className="text-xs text-gray-400 ml-2 animate-pulse">Thinking...</div>}
             </div>
-            <div className="p-3 border-t border-gray-700">
-              <div className="flex gap-2">
-                <input 
-                  type="text" 
-                  value={chatInput}
-                  onChange={(e) => setChatInput(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                  placeholder="Ask something..." 
-                  className={`flex-1 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 ${isDarkMode ? 'bg-gray-800 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
-                />
-                <button onClick={handleSendMessage} className="bg-blue-600 text-white p-2 rounded-lg">➤</button>
-              </div>
+
+            {/* Input Area */}
+            <div className="p-3 bg-white/5 border-t border-white/10 flex gap-2">
+              <input
+                type="text"
+                className="flex-1 bg-transparent border border-gray-600 rounded-full px-4 py-2 text-white focus:outline-none focus:border-blue-500 placeholder-gray-400"
+                placeholder="Ask me anything..."
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              />
+              <button 
+                onClick={handleSendMessage}
+                className="bg-blue-600 hover:bg-blue-500 text-white p-2 rounded-full transition-all flex items-center justify-center w-10 h-10"
+              >
+                🚀
+              </button>
             </div>
           </div>
         )}
-        <button onClick={() => setIsChatOpen(!isChatOpen)} className="bg-blue-600 hover:bg-blue-500 text-white p-4 rounded-full shadow-lg transition-transform hover:scale-110 flex items-center justify-center w-14 h-14 text-2xl">
-          {isChatOpen ? '✕' : '💬'}
-        </button>
+        
+        {/* Toggle Button */}
+        {!isChatOpen && (
+          <button 
+            onClick={() => setIsChatOpen(true)} 
+            className="bg-blue-600 hover:bg-blue-500 text-white p-4 rounded-full shadow-lg transition-transform hover:scale-110 flex items-center justify-center w-14 h-14 text-2xl"
+          >
+            💬
+          </button>
+        )}
       </div>
+
     </div>
   );
 }
