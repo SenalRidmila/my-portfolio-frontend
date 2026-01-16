@@ -13,7 +13,7 @@ function App() {
   
   // Chat State
   const [chatMessages, setChatMessages] = useState([
-    { role: 'bot', text: 'Hi! Kohomada? Magen ona deyak ahanna.' }
+    { role: 'bot', text: 'Hi! Kohomada? Senal gana ona deyak ahanna.' }
   ]);
   const [chatInput, setChatInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -404,9 +404,6 @@ function App() {
       <section id="contact" className={`py-24 px-6 text-center ${isDarkMode ? 'bg-gray-800/30' : 'bg-blue-50'}`}>
         <h2 className="text-3xl md:text-4xl font-bold mb-8">Let's Connect</h2>
         <div className="max-w-3xl mx-auto space-y-8">
-          <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-            I am currently open for internship opportunities and collaborative projects.
-          </p>
           <div className="flex flex-col items-center gap-6 mt-8">
             <a href={`mailto:${personalInfo.email}`} className="w-full md:w-auto bg-blue-600 text-white px-10 py-4 rounded-full hover:bg-blue-700 transition font-bold text-lg shadow-lg hover:shadow-blue-500/40">
               ✉ {personalInfo.email}
