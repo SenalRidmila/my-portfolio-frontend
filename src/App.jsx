@@ -5,6 +5,8 @@ import profileImg from './assets/profile.png';
 import petShopImg from './assets/pet-shop.png';
 import sltTireImg from './assets/slt-tire.png';
 import ayurvedaImg from './assets/ayurveda.png';
+import carRentalImg from './assets/car-rental.png';
+import virtualFittingImg from './assets/virtual-fitting.png';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -72,7 +74,7 @@ function App() {
       title: "Car Rental System", 
       tech: "Java Swing, MySQL, JDBC", 
       desc: "MVC architecture system for managing car rentals, user login, and customer management.", 
-      image: null, 
+      image: carRentalImg, 
       github: "https://github.com/SenalRidmila/Car-Rental-Management-System", 
       live: null 
     },
@@ -80,7 +82,7 @@ function App() {
       title: "Virtual Fitting App", 
       tech: "Next.js, Tailwind CSS, TypeScript", 
       desc: "A sleek virtual-fitting app offering real-time UI components and virtual try-on experiences.", 
-      image: null, 
+      image: virtualFittingImg, 
       github: "https://github.com/SenalRidmila/virtual-fitting", 
       live: null 
     }
