@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-
 import profileImg from './assets/profile.png';
 import petShopImg from './assets/pet-shop.png';
 import sltTireImg from './assets/slt-tire.png';
 import ayurvedaImg from './assets/ayurveda.png';
 import carRentalImg from './assets/car-rental.png';
 import virtualFittingImg from './assets/virtual-fitting.png';
+import workConnectImg from './assets/workconnect.png'; 
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -46,6 +46,14 @@ function App() {
 
   // --- Projects Data ---
   const projects = [
+    { 
+      title: "WorkConnect Job Marketplace", 
+      tech: "MERN Stack, AWS EC2, Docker, Socket.io", 
+      desc: "Built and deployed a MERN stack job marketplace on AWS EC2 using Docker, featuring real-time chat (Socket.io) and production-level security configurations.", 
+      image: workConnectImg, 
+      github: "https://github.com/SenalRidmila/workconnect-lk", 
+      live: "http://51.20.95.56.nip.io:5173/" 
+    },
     { 
       title: "Pet Toy Shop", 
       tech: "Spring Boot, React, MongoDB, Docker", 
@@ -185,7 +193,6 @@ function App() {
   return (
     <div className={`min-h-screen transition-colors duration-300 font-sans ${isDarkMode ? 'bg-dark text-white' : 'bg-gray-50 text-gray-900'}`}>
       
-      {/* Navbar (Updated with glass-nav class) */}
       <nav className={`glass-nav ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div onClick={() => scrollToSection('home')} className="text-xl font-bold flex items-center gap-2 cursor-pointer select-none">
@@ -343,11 +350,11 @@ function App() {
                   {project.desc}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
-                   {project.tech.split(',').map((tag, i) => (
-                     <span key={i} className={`text-xs px-2 py-1 rounded border font-mono ${isDarkMode ? 'bg-gray-800 border-gray-600 text-blue-300' : 'bg-blue-50 border-blue-100 text-blue-600'}`}>
-                       {tag.trim()}
-                     </span>
-                   ))}
+                    {project.tech.split(',').map((tag, i) => (
+                      <span key={i} className={`text-xs px-2 py-1 rounded border font-mono ${isDarkMode ? 'bg-gray-800 border-gray-600 text-blue-300' : 'bg-blue-50 border-blue-100 text-blue-600'}`}>
+                        {tag.trim()}
+                      </span>
+                    ))}
                 </div>
                 <div className="flex gap-3 mt-auto">
                   {project.github && (
