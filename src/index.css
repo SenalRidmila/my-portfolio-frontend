@@ -2,60 +2,160 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Premium Font Setup - Inter for body, Outfit for headings */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  /* Custom CSS Variables for Premium Theme */
+  --color-primary: #3b82f6;
+  --color-primary-dark: #2563eb;
+  --color-secondary: #8b5cf6;
+  --color-accent: #ec4899;
+  --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  --gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  --blur-glass: blur(16px);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 1. Text Size Adjust Warning Fix */
+/* Smooth Scroll Behavior */
 html {
-  -webkit-text-size-adjust: 100%; /* Chrome/Safari */
-  text-size-adjust: 100%;         /* Standard */
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
-  @apply bg-dark text-white font-sans;
+  @apply bg-dark text-white;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* 2. Safari Backdrop Filter Fix (Glass Effect) */
+/* Premium Heading Font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Enhanced Glass Navigation with Premium Blur */
 .glass-nav {
   @apply fixed w-full z-50 border-b transition-colors duration-300;
-  /* Standard support */
-  backdrop-filter: blur(12px);
-  /* Safari support */
-  -webkit-backdrop-filter: blur(12px);
-  /* Colors */
-  @apply bg-white/90 dark:bg-dark/90 border-gray-200 dark:border-gray-700;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(15, 23, 42, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Scrollbar Styles */
+/* Premium Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-dark;
+  background: #0f172a;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-700 rounded-full;
+  background: linear-gradient(180deg, #3b82f6 0%, #8b5cf6 100%);
+  border-radius: 10px;
+  border: 2px solid #0f172a;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2563eb 0%, #7c3aed 100%);
 }
 
-/* Animation Utilities */
+/* Premium Animations */
 @keyframes blob {
-  0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-  100% { transform: translate(0px, 0px) scale(1); }
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(40px, -60px) scale(1.15); }
+  66% { transform: translate(-30px, 30px) scale(0.9); }
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.4);
+  }
+}
+
 .animate-blob {
-  animation: blob 7s infinite;
+  animation: blob 8s ease-in-out infinite;
 }
+
 .animation-delay-2000 {
   animation-delay: 2s;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #0f172a; /* Dark Blue-Black Background */
+/* Premium Card Glassmorphism */
+.glass-card {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Premium Button Hover Effects */
+button, .btn {
+  transition: var(--transition-smooth);
+}
+
+button:hover, .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+}
+
+/* Gradient Text Effect */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Loading Skeleton */
+.skeleton {
+  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Focus Visible for Accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Selection Color */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
   color: white;
+}
+
+/* Smooth Transitions for Dark Mode */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }

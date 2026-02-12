@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import profileImg from './assets/profile.png';
-import petShopImg from './assets/pet-shop.png';
-import sltTireImg from './assets/slt-tire.png';
-import ayurvedaImg from './assets/ayurveda.png';
-import carRentalImg from './assets/car-rental.png';
-import virtualFittingImg from './assets/virtual-fitting.png';
-import workConnectImg from './assets/workconnect.png'; 
+import profileImg from './assets/profile.webp';
+import petShopImg from './assets/pet-shop.webp';
+import sltTireImg from './assets/slt-tire.webp';
+import ayurvedaImg from './assets/ayurveda.webp';
+import carRentalImg from './assets/car-rental.webp';
+import virtualFittingImg from './assets/virtual-fitting.webp';
+import workConnectImg from './assets/workconnect.webp'; 
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -242,7 +242,7 @@ function App() {
           <div className="flex justify-center order-1 md:order-2">
              <div className="relative w-72 h-72 md:w-96 md:h-96 group">
                 <div className="absolute inset-0 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-                <img src={profileImg} alt="Senal" className="relative w-full h-full object-cover rounded-full border-4 border-blue-500 shadow-2xl" />
+                <img src={profileImg} alt="Senal Ridmila - Full Stack Developer" loading="lazy" className="relative w-full h-full object-cover rounded-full border-4 border-blue-500 shadow-2xl" />
              </div>
           </div>
         </div>
@@ -335,7 +335,7 @@ function App() {
             <div key={index} className={`group flex flex-col rounded-2xl overflow-hidden transition duration-300 hover:-translate-y-2 border ${isDarkMode ? 'bg-card border-gray-700 hover:border-blue-500' : 'bg-white border-gray-200 hover:border-blue-500 shadow-lg'}`}>
               <div className="h-48 w-full overflow-hidden bg-gray-800 relative">
                 {project.image ? (
-                  <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                  <img src={project.image} alt={`${project.title} - Portfolio Project`} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
                 ) : (
                   <div className="w-full h-full flex flex-col items-center justify-center text-gray-500 bg-gray-900">
                     <span className="text-4xl mb-2">📂</span>
