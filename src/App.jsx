@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async'; // ✅ SEO Import
 
 import profileImg from './assets/profile.webp';
 import petShopImg from './assets/pet-shop.webp';
@@ -12,7 +13,7 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
-
+  
   // Chat State
   const [chatMessages, setChatMessages] = useState([
     { role: 'bot', text: 'Hi! Kohomada? Senal gana ona deyak ahanna.' }
@@ -46,53 +47,53 @@ function App() {
 
   // --- Projects Data ---
   const projects = [
-    {
-      title: "WorkConnect Job Marketplace",
-      tech: "MERN Stack, AWS EC2, Docker, Socket.io",
-      desc: "Built and deployed a MERN stack job marketplace on AWS EC2 using Docker, featuring real-time chat (Socket.io) and production-level security configurations.",
-      image: workConnectImg,
-      github: "https://github.com/SenalRidmila/workconnect-lk",
-      live: "http://51.20.95.56.nip.io:5173/"
+    { 
+      title: "WorkConnect Job Marketplace", 
+      tech: "MERN Stack, AWS EC2, Docker, Socket.io", 
+      desc: "Built and deployed a MERN stack job marketplace on AWS EC2 using Docker, featuring real-time chat (Socket.io) and production-level security configurations.", 
+      image: workConnectImg, 
+      github: "https://github.com/SenalRidmila/workconnect-lk", 
+      live: "http://51.20.95.56.nip.io:5173/" 
     },
-    {
-      title: "Pet Toy Shop",
-      tech: "Spring Boot, React, MongoDB, Docker",
-      desc: "A robust full-stack e-commerce platform with DevOps integration and CI/CD pipelines.",
-      image: petShopImg,
-      github: "https://github.com/SenalRidmila/pet-toy-shop-devops",
-      live: null
+    { 
+      title: "Pet Toy Shop", 
+      tech: "Spring Boot, React, MongoDB, Docker", 
+      desc: "A robust full-stack e-commerce platform with DevOps integration and CI/CD pipelines.", 
+      image: petShopImg, 
+      github: "https://github.com/SenalRidmila/pet-toy-shop-devops", 
+      live: null 
     },
-    {
-      title: "Ayurveda Wellness App",
-      tech: "React Native, Firebase, Expo",
-      desc: "Mobile app connecting patients with Ayurvedic doctors, featuring AI symptom checkers.",
-      image: ayurvedaImg,
-      github: "https://github.com/SenalRidmila/ayurveda-wellness",
-      live: null
+    { 
+      title: "Ayurveda Wellness App", 
+      tech: "React Native, Firebase, Expo", 
+      desc: "Mobile app connecting patients with Ayurvedic doctors, featuring AI symptom checkers.", 
+      image: ayurvedaImg, 
+      github: "https://github.com/SenalRidmila/ayurveda-wellness", 
+      live: null 
     },
-    {
-      title: "SLT Tire Management",
-      tech: "React, Spring Boot, Docker",
-      desc: "Interactive tire request system with a Java-powered backend managing request handling.",
-      image: sltTireImg,
-      github: null,
-      live: "https://tire-slt.vercel.app/login"
+    { 
+      title: "SLT Tire Management", 
+      tech: "React, Spring Boot, Docker", 
+      desc: "Interactive tire request system with a Java-powered backend managing request handling.", 
+      image: sltTireImg, 
+      github: null, 
+      live: "https://tire-slt.vercel.app/login" 
     },
-    {
-      title: "Car Rental System",
-      tech: "Java Swing, MySQL, JDBC",
-      desc: "MVC architecture system for managing car rentals, user login, and customer management.",
-      image: carRentalImg,
-      github: "https://github.com/SenalRidmila/Car-Rental-Management-System",
-      live: null
+    { 
+      title: "Car Rental System", 
+      tech: "Java Swing, MySQL, JDBC", 
+      desc: "MVC architecture system for managing car rentals, user login, and customer management.", 
+      image: carRentalImg, 
+      github: "https://github.com/SenalRidmila/Car-Rental-Management-System", 
+      live: null 
     },
-    {
-      title: "Virtual Fitting App",
-      tech: "Next.js, Tailwind CSS, TypeScript",
-      desc: "A sleek virtual-fitting app offering real-time UI components and virtual try-on experiences.",
-      image: virtualFittingImg,
-      github: "https://github.com/SenalRidmila/virtual-fitting",
-      live: null
+    { 
+      title: "Virtual Fitting App", 
+      tech: "Next.js, Tailwind CSS, TypeScript", 
+      desc: "A sleek virtual-fitting app offering real-time UI components and virtual try-on experiences.", 
+      image: virtualFittingImg, 
+      github: "https://github.com/SenalRidmila/virtual-fitting", 
+      live: null 
     }
   ];
 
@@ -107,7 +108,7 @@ function App() {
     const file = e.target.files[0];
     if (!file) return;
     setConvertingImg(true);
-
+    
     const formData = new FormData();
     formData.append("file", file);
 
@@ -139,7 +140,7 @@ function App() {
     const file = e.target.files[0];
     if (!file) return;
     setConvertingPdf(true);
-
+    
     const formData = new FormData();
     formData.append("file", file);
 
@@ -170,7 +171,7 @@ function App() {
   // --- Chat Functions ---
   const handleSendMessage = async () => {
     if (!chatInput.trim()) return;
-
+    
     const newMessages = [...chatMessages, { role: 'user', text: chatInput }];
     setChatMessages(newMessages);
     setChatInput("");
@@ -192,7 +193,23 @@ function App() {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 font-sans ${isDarkMode ? 'bg-dark text-white' : 'bg-gray-50 text-gray-900'}`}>
+      
+      {/* ✅ SEO Meta Tags Added Here */}
+      <Helmet>
+        <title>Senal Ridmila | Full Stack Developer</title>
+        <meta name="description" content="Portfolio of Senal Ridmila - Full Stack Developer from Horizon Campus specializing in React, Spring Boot, and Cloud Technologies. Explore my projects and tools." />
+        <meta name="keywords" content="Senal Ridmila, Web Developer Sri Lanka, Full Stack Developer, React Developer, Spring Boot, Software Engineer, Horizon Campus" />
+        <meta name="author" content="Senal Ridmila" />
+        
+        {/* Open Graph / Facebook & LinkedIn */}
+        <meta property="og:title" content="Senal Ridmila | Full Stack Developer" />
+        <meta property="og:description" content="Check out my developer portfolio featuring AI integration and full-stack projects." />
+        <meta property="og:image" content="https://senalridmila.me/assets/profile.webp" />
+        <meta property="og:url" content="https://senalridmila.me" />
+        <meta property="og:type" content="website" />
+      </Helmet>
 
+      {/* Navbar (Updated with glass-nav class) */}
       <nav className={`glass-nav ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div onClick={() => scrollToSection('home')} className="text-xl font-bold flex items-center gap-2 cursor-pointer select-none">
@@ -232,7 +249,7 @@ function App() {
             <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">{personalInfo.name}</h1>
             <h3 className={`text-2xl md:text-3xl font-semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Full Stack Developer from Horizon Campus</h3>
             <p className={`text-lg max-w-lg mx-auto md:mx-0 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              Senal Ridmila is a {personalInfo.title} at Horizon Campus Sri Lanka. Expert Full Stack Developer specializing in building scalable web solutions with Java, React, Spring Boot, Next.js, and Cloud Technologies.
+               Senal Ridmila is a {personalInfo.title} at Horizon Campus Sri Lanka. Expert Full Stack Developer specializing in building scalable web solutions with Java, React, Spring Boot, Next.js, and Cloud Technologies.
             </p>
             <div className="flex gap-4 justify-center md:justify-start pt-4 flex-wrap">
               <a href="/Senal_Ridmila_CV.pdf" download className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-bold hover:from-blue-700 hover:to-purple-700 transition shadow-lg flex items-center gap-2">
@@ -243,10 +260,10 @@ function App() {
             </div>
           </div>
           <div className="flex justify-center order-1 md:order-2">
-            <div className="relative w-72 h-72 md:w-96 md:h-96 group">
-              <div className="absolute inset-0 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-              <img src={profileImg} alt="Senal Ridmila - Full Stack Developer from Horizon Campus Sri Lanka" loading="lazy" className="relative w-full h-full object-cover rounded-full border-4 border-blue-500 shadow-2xl" />
-            </div>
+             <div className="relative w-72 h-72 md:w-96 md:h-96 group">
+                <div className="absolute inset-0 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+                <img src={profileImg} alt="Senal Ridmila - Full Stack Developer from Horizon Campus Sri Lanka" loading="lazy" className="relative w-full h-full object-cover rounded-full border-4 border-blue-500 shadow-2xl" />
+             </div>
           </div>
         </div>
       </section>
@@ -353,11 +370,11 @@ function App() {
                   {project.desc}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.split(',').map((tag, i) => (
-                    <span key={i} className={`text-xs px-2 py-1 rounded border font-mono ${isDarkMode ? 'bg-gray-800 border-gray-600 text-blue-300' : 'bg-blue-50 border-blue-100 text-blue-600'}`}>
-                      {tag.trim()}
-                    </span>
-                  ))}
+                    {project.tech.split(',').map((tag, i) => (
+                      <span key={i} className={`text-xs px-2 py-1 rounded border font-mono ${isDarkMode ? 'bg-gray-800 border-gray-600 text-blue-300' : 'bg-blue-50 border-blue-100 text-blue-600'}`}>
+                        {tag.trim()}
+                      </span>
+                    ))}
                 </div>
                 <div className="flex gap-3 mt-auto">
                   {project.github && (
@@ -440,7 +457,7 @@ function App() {
             </div>
           </div>
           <div className={`mt-16 pt-8 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}>
-            <p className="text-sm opacity-50">© 2026 Senal Ridmila. </p>
+             <p className="text-sm opacity-50">© 2026 Senal Ridmila. </p>
           </div>
         </div>
       </section>
@@ -463,12 +480,12 @@ function App() {
             </div>
             <div className="p-3 border-t border-gray-700">
               <div className="flex gap-2">
-                <input
-                  type="text"
+                <input 
+                  type="text" 
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                  placeholder="Ask something..."
+                  placeholder="Ask something..." 
                   className={`flex-1 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 ${isDarkMode ? 'bg-gray-800 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
                 />
                 <button onClick={handleSendMessage} className="bg-blue-600 text-white p-2 rounded-lg">➤</button>
