@@ -194,7 +194,7 @@ function App() {
   return (
     <div className={`min-h-screen transition-colors duration-300 font-sans ${isDarkMode ? 'bg-dark text-white' : 'bg-gray-50 text-gray-900'}`}>
       
-      {/* ✅ SEO Meta Tags Added Here */}
+      {/* ✅ SEO Meta Tags */}
       <Helmet>
         <title>Senal Ridmila | Full Stack Developer</title>
         <meta name="description" content="Portfolio of Senal Ridmila - Full Stack Developer from Horizon Campus specializing in React, Spring Boot, and Cloud Technologies. Explore my projects and tools." />
@@ -209,7 +209,7 @@ function App() {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      {/* Navbar (Updated with glass-nav class) */}
+      {/* Navbar */}
       <nav className={`glass-nav ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div onClick={() => scrollToSection('home')} className="text-xl font-bold flex items-center gap-2 cursor-pointer select-none">
@@ -224,10 +224,22 @@ function App() {
             ))}
           </ul>
           <div className="flex items-center gap-4">
-            <button onClick={() => setIsDarkMode(!isDarkMode)} className={`p-2 rounded-full shadow-lg transition transform hover:scale-110 ${isDarkMode ? 'bg-gray-700 text-yellow-400' : 'bg-gray-200 text-gray-800'}`}>
+            {/* ✅ Added aria-label for Accessibility */}
+            <button 
+                aria-label="Toggle Dark Mode"
+                onClick={() => setIsDarkMode(!isDarkMode)} 
+                className={`p-2 rounded-full shadow-lg transition transform hover:scale-110 ${isDarkMode ? 'bg-gray-700 text-yellow-400' : 'bg-gray-200 text-gray-800'}`}
+            >
               {isDarkMode ? '☀' : '🌙'}
             </button>
-            <button className="md:hidden text-2xl" onClick={() => setIsMenuOpen(!isMenuOpen)}>{isMenuOpen ? '✕' : '☰'}</button>
+            {/* ✅ Added aria-label for Accessibility */}
+            <button 
+                aria-label="Toggle Mobile Menu"
+                className="md:hidden text-2xl" 
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+                {isMenuOpen ? '✕' : '☰'}
+            </button>
           </div>
         </div>
         {isMenuOpen && (
@@ -468,7 +480,8 @@ function App() {
           <div className={`mb-4 w-80 md:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col border ${isDarkMode ? 'bg-card border-gray-700' : 'bg-white border-gray-200'}`}>
             <div className="bg-blue-600 p-4 text-white font-bold flex justify-between items-center">
               <span>🤖 Senal's AI</span>
-              <button onClick={() => setIsChatOpen(false)}>✕</button>
+              {/* ✅ Added aria-label for Accessibility */}
+              <button aria-label="Close Chat" onClick={() => setIsChatOpen(false)}>✕</button>
             </div>
             <div className={`h-80 p-4 overflow-y-auto space-y-3 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
               {chatMessages.map((msg, i) => (
@@ -488,12 +501,18 @@ function App() {
                   placeholder="Ask something..." 
                   className={`flex-1 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 ${isDarkMode ? 'bg-gray-800 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
                 />
-                <button onClick={handleSendMessage} className="bg-blue-600 text-white p-2 rounded-lg">➤</button>
+                {/* ✅ Added aria-label for Accessibility */}
+                <button aria-label="Send Message" onClick={handleSendMessage} className="bg-blue-600 text-white p-2 rounded-lg">➤</button>
               </div>
             </div>
           </div>
         )}
-        <button onClick={() => setIsChatOpen(!isChatOpen)} className="bg-blue-600 hover:bg-blue-500 text-white p-4 rounded-full shadow-lg transition-transform hover:scale-110 flex items-center justify-center w-14 h-14 text-2xl">
+        {/* ✅ Added aria-label for Accessibility */}
+        <button 
+            aria-label="Toggle Chat Assistant"
+            onClick={() => setIsChatOpen(!isChatOpen)} 
+            className="bg-blue-600 hover:bg-blue-500 text-white p-4 rounded-full shadow-lg transition-transform hover:scale-110 flex items-center justify-center w-14 h-14 text-2xl"
+        >
           {isChatOpen ? '✕' : '💬'}
         </button>
       </div>
