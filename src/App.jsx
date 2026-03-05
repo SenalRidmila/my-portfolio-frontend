@@ -742,15 +742,15 @@ function App() {
       </section>
 
       {/* Floating Chatbot Widget */}
-      <div className="fixed bottom-8 right-8 z-50">
+      <div className="fixed bottom-20 right-4 md:bottom-24 md:right-8 z-50 max-w-[calc(100vw-2rem)]">
         {isChatOpen && (
-          <div className={`mb-4 w-80 md:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col border ${isDarkMode ? 'bg-card border-gray-700' : 'bg-white border-gray-200'}`}>
+          <div className={`mb-4 w-full sm:w-80 md:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col border ${isDarkMode ? 'bg-card border-gray-700' : 'bg-white border-gray-200'}`}>
             <div className="bg-blue-600 p-4 text-white font-bold flex justify-between items-center">
               <span>🤖 Senal's AI</span>
               {/* ✅ Added aria-label for Accessibility */}
               <button aria-label="Close Chat" onClick={() => setIsChatOpen(false)}>✕</button>
             </div>
-            <div className={`h-80 p-4 overflow-y-auto space-y-3 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+            <div className={`h-[50vh] sm:h-80 p-4 overflow-y-auto space-y-3 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
               {chatMessages.map((msg, i) => (
                 <div key={i} className={`p-3 rounded-lg max-w-[85%] text-sm ${msg.role === 'user' ? 'bg-blue-600 text-white self-end ml-auto rounded-br-none' : 'bg-gray-700 text-gray-200 self-start rounded-tl-none'}`}>
                   {msg.text}
@@ -795,23 +795,23 @@ function App() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={scrollToTop}
-            className={`fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 p-3 rounded-full cursor-pointer shadow-xl border backdrop-blur-md transition-colors ${isDarkMode
+            className={`fixed bottom-6 right-4 md:bottom-8 md:right-8 z-50 p-2 md:p-3 rounded-full cursor-pointer shadow-xl border backdrop-blur-md transition-colors ${isDarkMode
               ? 'bg-blue-600/80 border-blue-500/50 text-white hover:bg-blue-600 shadow-blue-500/30'
               : 'bg-white border-gray-200 text-blue-600 hover:bg-blue-50 shadow-gray-200/50'
               }`}
           >
-            <ArrowUp size={24} />
+            <ArrowUp size={24} className="scale-75 md:scale-100" />
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Floating Chat Button */}
-      <div className="fixed bottom-6 right-20 md:bottom-8 md:right-24 z-50">
+      <div className="fixed bottom-6 right-16 md:bottom-8 md:right-24 z-50">
         {/* ✅ Added aria-label for Accessibility */}
         <button
           aria-label="Toggle Chat Assistant"
           onClick={() => setIsChatOpen(!isChatOpen)}
-          className="bg-blue-600 hover:bg-blue-500 text-white p-4 rounded-full shadow-lg transition-transform hover:scale-110 flex items-center justify-center w-14 h-14 text-2xl"
+          className="bg-blue-600 hover:bg-blue-500 text-white p-3 md:p-4 rounded-full shadow-lg transition-transform hover:scale-110 flex items-center justify-center w-12 h-12 md:w-14 md:h-14 text-xl md:text-2xl"
         >
           {isChatOpen ? '✕' : '💬'}
         </button>
@@ -825,7 +825,7 @@ function App() {
         href="https://wa.me/94771304930"
         target="_blank"
         rel="noreferrer"
-        className="fixed bottom-8 left-8 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-[0_0_20px_rgba(34,197,94,0.4)] flex items-center justify-center w-14 h-14"
+        className="fixed bottom-6 left-4 md:bottom-8 md:left-8 z-50 bg-green-500 hover:bg-green-600 text-white p-3 md:p-4 rounded-full shadow-[0_0_20px_rgba(34,197,94,0.4)] flex items-center justify-center w-12 h-12 md:w-14 md:h-14"
       >
         <span className="absolute inset-0 rounded-full border-2 border-green-500 animate-ping opacity-50"></span>
         <WhatsAppIcon size={28} />
@@ -838,7 +838,7 @@ function App() {
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
-            className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-md p-4 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border shadow-2xl backdrop-blur-xl ${isDarkMode ? 'bg-gray-900/90 border-gray-700' : 'bg-white/90 border-gray-200'
+            className={`fixed bottom-24 md:bottom-6 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md p-4 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border shadow-2xl backdrop-blur-xl ${isDarkMode ? 'bg-gray-900/90 border-gray-700' : 'bg-white/90 border-gray-200'
               }`}
           >
             <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
