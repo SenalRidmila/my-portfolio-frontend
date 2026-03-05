@@ -12,7 +12,7 @@
   --color-secondary: #8b5cf6;
   --color-accent: #ec4899;
   --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
-  --gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  --gradient-dark: linear-gradient(135deg, #172033 0%, #0b1120 100%);
   --blur-glass: blur(16px);
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -27,7 +27,7 @@ html {
 body {
   @apply bg-dark text-white;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  background: linear-gradient(135deg, #0b1120 0%, #172033 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

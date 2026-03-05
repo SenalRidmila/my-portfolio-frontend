@@ -4,12 +4,12 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class', 
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        dark: "#0f172a",
-        card: "#1e293b",
+        dark: "#0b1120", // Richer dark navy/blue-gray
+        card: "#172033", // Slightly lighter navy card
         primary: "#3b82f6",
       },
       fontFamily: {
