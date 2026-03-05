@@ -741,18 +741,78 @@ function App() {
         </div>
       </section>
 
-      {/* Floating Chatbot Widget */}
-      <div className="fixed bottom-20 right-4 md:bottom-24 md:right-8 z-50 max-w-[calc(100vw-2rem)]">
+      {/* ===== FLOATING BUTTON TOOLBAR (right side, stacked vertically) ===== */}
+      <div className="fixed bottom-6 right-4 md:bottom-8 md:right-6 z-50 flex flex-col items-center gap-3">
+
+        {/* Scroll to Top */}
+        <AnimatePresence>
+          {showScrollTop && (
+            <motion.button
+              aria-label="Scroll to top"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={scrollToTop}
+              className={`p-2.5 md:p-3 rounded-full cursor-pointer shadow-xl border backdrop-blur-md transition-colors ${isDarkMode
+                  ? 'bg-gray-800/90 border-gray-700 text-white hover:bg-blue-600'
+                  : 'bg-white border-gray-200 text-blue-600 hover:bg-blue-50'
+                }`}
+            >
+              <ArrowUp size={20} />
+            </motion.button>
+          )}
+        </AnimatePresence>
+
+        {/* WhatsApp */}
+        <motion.a
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          href="https://wa.me/94771304930"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Chat on WhatsApp"
+          className="relative p-2.5 md:p-3 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-[0_0_16px_rgba(34,197,94,0.45)] flex items-center justify-center w-11 h-11 md:w-12 md:h-12"
+        >
+          <span className="absolute inset-0 rounded-full border-2 border-green-400 animate-ping opacity-40"></span>
+          <WhatsAppIcon size={22} />
+        </motion.a>
+
+        {/* Chat toggle */}
+        <button
+          aria-label="Toggle Chat Assistant"
+          onClick={() => setIsChatOpen(!isChatOpen)}
+          className="p-2.5 md:p-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white shadow-lg transition-transform hover:scale-110 flex items-center justify-center w-11 h-11 md:w-12 md:h-12 text-xl"
+        >
+          {isChatOpen ? '✕' : '💬'}
+        </button>
+      </div>
+
+      {/* Chatbot Window */}
+      <AnimatePresence>
         {isChatOpen && (
-          <div className={`mb-4 w-full sm:w-80 md:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col border ${isDarkMode ? 'bg-card border-gray-700' : 'bg-white border-gray-200'}`}>
-            <div className="bg-blue-600 p-4 text-white font-bold flex justify-between items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.25 }}
+            className={`fixed bottom-32 right-4 md:bottom-36 md:right-6 z-50 w-[calc(100vw-2rem)] sm:w-80 md:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col border ${isDarkMode ? 'bg-card border-gray-700' : 'bg-white border-gray-200'
+              }`}
+          >
+            <div className="bg-blue-600 p-3 md:p-4 text-white font-bold flex justify-between items-center">
               <span>🤖 Senal's AI</span>
-              {/* ✅ Added aria-label for Accessibility */}
               <button aria-label="Close Chat" onClick={() => setIsChatOpen(false)}>✕</button>
             </div>
-            <div className={`h-[50vh] sm:h-80 p-4 overflow-y-auto space-y-3 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+            <div className={`h-[45vh] sm:h-72 p-4 overflow-y-auto space-y-3 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
+              }`}>
               {chatMessages.map((msg, i) => (
-                <div key={i} className={`p-3 rounded-lg max-w-[85%] text-sm ${msg.role === 'user' ? 'bg-blue-600 text-white self-end ml-auto rounded-br-none' : 'bg-gray-700 text-gray-200 self-start rounded-tl-none'}`}>
+                <div key={i} className={`p-3 rounded-lg max-w-[85%] text-sm ${msg.role === 'user'
+                    ? 'bg-blue-600 text-white self-end ml-auto rounded-br-none'
+                    : 'bg-gray-700 text-gray-200 self-start rounded-tl-none'
+                  }`}>
                   {msg.text}
                 </div>
               ))}
@@ -767,7 +827,7 @@ function App() {
                 </div>
               )}
             </div>
-            <div className="p-3 border-t border-gray-700">
+            <div className={`p-3 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -775,61 +835,15 @@ function App() {
                   onChange={(e) => setChatInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                   placeholder="Ask something..."
-                  className={`flex-1 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 ${isDarkMode ? 'bg-gray-800 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+                  className={`flex-1 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 ${isDarkMode ? 'bg-gray-800 border-gray-600 text-white' : 'bg-white border-gray-300'
+                    }`}
                 />
-                {/* ✅ Added aria-label for Accessibility */}
                 <button aria-label="Send Message" onClick={handleSendMessage} className="bg-blue-600 text-white p-2 rounded-lg">➤</button>
               </div>
             </div>
-          </div>
-        )}
-      </div>
-
-      {/* Floating Scroll to Top Button */}
-      <AnimatePresence>
-        {showScrollTop && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={scrollToTop}
-            className={`fixed bottom-6 right-4 md:bottom-8 md:right-8 z-50 p-2 md:p-3 rounded-full cursor-pointer shadow-xl border backdrop-blur-md transition-colors ${isDarkMode
-              ? 'bg-blue-600/80 border-blue-500/50 text-white hover:bg-blue-600 shadow-blue-500/30'
-              : 'bg-white border-gray-200 text-blue-600 hover:bg-blue-50 shadow-gray-200/50'
-              }`}
-          >
-            <ArrowUp size={24} className="scale-75 md:scale-100" />
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Floating Chat Button */}
-      <div className="fixed bottom-6 right-16 md:bottom-8 md:right-24 z-50">
-        {/* ✅ Added aria-label for Accessibility */}
-        <button
-          aria-label="Toggle Chat Assistant"
-          onClick={() => setIsChatOpen(!isChatOpen)}
-          className="bg-blue-600 hover:bg-blue-500 text-white p-3 md:p-4 rounded-full shadow-lg transition-transform hover:scale-110 flex items-center justify-center w-12 h-12 md:w-14 md:h-14 text-xl md:text-2xl"
-        >
-          {isChatOpen ? '✕' : '💬'}
-        </button>
-      </div>
-
-      {/* Floating WhatsApp Button */}
-      <motion.a
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        whileHover={{ scale: 1.1 }}
-        href="https://wa.me/94771304930"
-        target="_blank"
-        rel="noreferrer"
-        className="fixed bottom-6 left-4 md:bottom-8 md:left-8 z-50 bg-green-500 hover:bg-green-600 text-white p-3 md:p-4 rounded-full shadow-[0_0_20px_rgba(34,197,94,0.4)] flex items-center justify-center w-12 h-12 md:w-14 md:h-14"
-      >
-        <span className="absolute inset-0 rounded-full border-2 border-green-500 animate-ping opacity-50"></span>
-        <WhatsAppIcon size={28} />
-      </motion.a>
 
       {/* Cookie Consent Banner */}
       <AnimatePresence>
