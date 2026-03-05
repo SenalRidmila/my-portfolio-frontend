@@ -8,8 +8,8 @@ import ayurvedaImg from './assets/ayurveda.webp';
 import carRentalImg from './assets/car-rental.webp';
 import virtualFittingImg from './assets/virtual-fitting.webp';
 import workConnectImg from './assets/workconnect.webp';
-import belloraImg from './assets/Belloraaa.png';
-import lumiereImg from './assets/Lumiere.png';
+import belloraImg from './assets/Bellora.webp';
+import lumiereImg from './assets/Lumiere.webp';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -35,6 +35,14 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [isDarkMode]);
+
+  // Keep-Alive Ping – prevents Render free tier cold start
+  useEffect(() => {
+    const ping = () => fetch("https://my-portfolio-backend-mst1.onrender.com/").catch(() => { });
+    ping(); // ping immediately on load
+    const interval = setInterval(ping, 240000); // every 4 minutes
+    return () => clearInterval(interval);
+  }, []);
 
   // --- Personal Data ---
   const personalInfo = {
