@@ -52,8 +52,8 @@ function App() {
   useEffect(() => {
     const hasAccepted = localStorage.getItem('cookiesAccepted');
     if (!hasAccepted) {
-      // Small delay before showing cookies banner
-      const timer = setTimeout(() => setShowCookies(true), 1500);
+      // Delay showing banner so user can see the page first
+      const timer = setTimeout(() => setShowCookies(true), 3000);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -835,10 +835,11 @@ function App() {
       <AnimatePresence>
         {showCookies && (
           <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            className={`fixed bottom-24 md:bottom-6 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md p-4 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border shadow-2xl backdrop-blur-xl ${isDarkMode ? 'bg-gray-900/90 border-gray-700' : 'bg-white/90 border-gray-200'
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className={`fixed top-4 left-1/2 -translate-x-1/2 z-[200] w-[92%] max-w-md p-4 flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl border shadow-2xl backdrop-blur-xl ${isDarkMode ? 'bg-gray-900/95 border-gray-700' : 'bg-white/95 border-gray-200'
               }`}
           >
             <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
