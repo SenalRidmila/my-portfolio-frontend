@@ -47,22 +47,6 @@ function App() {
     }
   }, [isDarkMode]);
 
-  // Cookies Logic
-  const [showCookies, setShowCookies] = useState(false);
-  useEffect(() => {
-    const hasAccepted = localStorage.getItem('cookiesAccepted');
-    if (!hasAccepted) {
-      // Delay showing banner so user can see the page first
-      const timer = setTimeout(() => setShowCookies(true), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  const acceptCookies = () => {
-    localStorage.setItem('cookiesAccepted', 'true');
-    setShowCookies(false);
-  };
-
   // Keep-Alive Ping – prevents Render free tier cold start
   useEffect(() => {
     const ping = () => fetch("https://my-portfolio-backend-mst1.onrender.com/").catch(() => { });
@@ -845,29 +829,6 @@ function App() {
         )}
       </AnimatePresence>
 
-      {/* Cookie Consent Banner */}
-      <AnimatePresence>
-        {showCookies && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-            className={`fixed top-16 md:top-4 left-1/2 -translate-x-1/2 z-[200] w-[92%] max-w-sm md:max-w-md px-4 py-3 flex flex-row items-center justify-between gap-3 rounded-2xl border shadow-2xl backdrop-blur-xl ${isDarkMode ? 'bg-gray-900/95 border-gray-700' : 'bg-white/95 border-gray-200'
-              }`}
-          >
-            <p className={`text-xs sm:text-sm leading-snug ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              🍪 We use cookies for the best experience.
-            </p>
-            <button
-              onClick={acceptCookies}
-              className="shrink-0 px-4 py-1.5 text-xs sm:text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white rounded-full whitespace-nowrap transition-transform active:scale-95"
-            >
-              Got it!
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
