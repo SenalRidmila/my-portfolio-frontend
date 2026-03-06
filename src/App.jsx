@@ -756,8 +756,8 @@ function App() {
               whileTap={{ scale: 0.9 }}
               onClick={scrollToTop}
               className={`p-2.5 md:p-3 rounded-full cursor-pointer shadow-xl border backdrop-blur-md transition-colors ${isDarkMode
-                  ? 'bg-gray-800/90 border-gray-700 text-white hover:bg-blue-600'
-                  : 'bg-white border-gray-200 text-blue-600 hover:bg-blue-50'
+                ? 'bg-gray-800/90 border-gray-700 text-white hover:bg-blue-600'
+                : 'bg-white border-gray-200 text-blue-600 hover:bg-blue-50'
                 }`}
             >
               <ArrowUp size={20} />
@@ -810,8 +810,8 @@ function App() {
               }`}>
               {chatMessages.map((msg, i) => (
                 <div key={i} className={`p-3 rounded-lg max-w-[85%] text-sm ${msg.role === 'user'
-                    ? 'bg-blue-600 text-white self-end ml-auto rounded-br-none'
-                    : 'bg-gray-700 text-gray-200 self-start rounded-tl-none'
+                  ? 'bg-blue-600 text-white self-end ml-auto rounded-br-none'
+                  : 'bg-gray-700 text-gray-200 self-start rounded-tl-none'
                   }`}>
                   {msg.text}
                 </div>
@@ -853,15 +853,15 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
-            className={`fixed top-4 left-1/2 -translate-x-1/2 z-[200] w-[92%] max-w-md p-4 flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl border shadow-2xl backdrop-blur-xl ${isDarkMode ? 'bg-gray-900/95 border-gray-700' : 'bg-white/95 border-gray-200'
+            className={`fixed top-16 md:top-4 left-1/2 -translate-x-1/2 z-[200] w-[92%] max-w-sm md:max-w-md px-4 py-3 flex flex-row items-center justify-between gap-3 rounded-2xl border shadow-2xl backdrop-blur-xl ${isDarkMode ? 'bg-gray-900/95 border-gray-700' : 'bg-white/95 border-gray-200'
               }`}
           >
-            <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              We use cookies to ensure you get the best experience on our website. 🍪
+            <p className={`text-xs sm:text-sm leading-snug ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+              🍪 We use cookies for the best experience.
             </p>
             <button
               onClick={acceptCookies}
-              className="px-6 py-2 text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white rounded-full whitespace-nowrap transition-transform active:scale-95"
+              className="shrink-0 px-4 py-1.5 text-xs sm:text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white rounded-full whitespace-nowrap transition-transform active:scale-95"
             >
               Got it!
             </button>
