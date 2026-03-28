@@ -289,7 +289,7 @@ function App() {
       <nav className={`glass-nav ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div onClick={() => scrollToSection('home')} className="text-xl font-bold flex items-center gap-2 cursor-pointer select-none">
-            <span className="text-blue-500 text-2xl">⚡</span> <span>Senal Ridmila</span>
+            <span className="text-blue-500 text-2xl"></span> <span>Senal Ridmila</span>
           </div>
           <ul className={`hidden md:flex gap-8 font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
             {['Home', 'About', 'Projects', 'Tools', 'Contact'].map((item) => (
