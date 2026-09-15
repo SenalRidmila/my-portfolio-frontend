@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async'; // ✅ SEO Import
+import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, Mail, Phone, Linkedin, Facebook, Cloud, ArrowUp } from 'lucide-react';
+import { Download, Mail, Linkedin, Facebook, Briefcase, FileText, Send, MessageCircle, X, Code, ExternalLink, Github, ImageIcon, Globe, Menu } from 'lucide-react';
 
 const WhatsAppIcon = ({ size = 24, className = "" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -11,163 +11,117 @@ const WhatsAppIcon = ({ size = 24, className = "" }) => (
 
 import profileImg from './assets/profile.webp';
 import petShopImg from './assets/pet-shop.webp';
-import sltTireImg from './assets/slt-tire.webp';
 import ayurvedaImg from './assets/ayurveda.webp';
 import carRentalImg from './assets/car-rental.webp';
 import virtualFittingImg from './assets/virtual-fitting.webp';
 import workConnectImg from './assets/workconnect.webp';
 import belloraImg from './assets/Bellora.webp';
 import lumiereImg from './assets/Lumiere.webp';
+import mamariImg from './assets/mamari.png';
+import cvFile from './assets/Senal-Ridmila.pdf';
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
-
-  // Chat State
   const [chatMessages, setChatMessages] = useState([
     { role: 'bot', text: 'Hi! Kohomada? Senal gana ona deyak ahanna.' }
   ]);
   const [chatInput, setChatInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-
-  // Tools State
   const [convertingImg, setConvertingImg] = useState(false);
   const [convertingPdf, setConvertingPdf] = useState(false);
 
-  // Scroll to Top State
-  const [showScrollTop, setShowScrollTop] = useState(false);
-
-  // Dark Mode Logic
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDarkMode]);
-
-  // Keep-Alive Ping – prevents Render free tier cold start
   useEffect(() => {
     const ping = () => fetch("https://my-portfolio-backend-mst1.onrender.com/").catch(() => { });
-    ping(); // ping immediately on load
-    const interval = setInterval(ping, 240000); // every 4 minutes
+    ping(); 
+    const interval = setInterval(ping, 240000); 
     return () => clearInterval(interval);
   }, []);
 
-  // --- Personal Data ---
   const personalInfo = {
     name: "Senal Ridmila",
-    title: "BSc (Hons) in Network and Mobile Computing Undergraduate",
     email: "senalridmila2@gmail.com",
-    phones: ["+94 77 130 4930", "+94 78 130 4930"],
     linkedin: "https://www.linkedin.com/in/senal-ridmila-98b996292",
     github: "https://github.com/SenalRidmila",
-    facebook: "https://www.facebook.com/share/1DJRPP89oN/?mibextid=wwXIfr",
   };
 
-  // --- Projects Data ---
   const projects = [
     {
+      title: "MAMARI LK | Web Application",
+      tech: "Next.js, Vercel",
+      desc: "Responsive web application engineered with Next.js, featuring CI/CD deployment, Google Search Console analytics, and professional webmail routing.",
+      image: mamariImg,
+      github: null,
+      live: "https://www.mamari.lk"
+    },
+    {
       title: "Bellora",
-      tech: "Next.js, PostgreSQL, Prisma ORM, Generative AI, Vercel",
-      desc: "Built using Next.js for a dynamic frontend, backed by PostgreSQL and Prisma ORM for robust data management. Advanced Generative AI powers the seamless clothing synthesis feature, deployed via Vercel.",
+      tech: "Next.js, Prisma, AI",
+      desc: "Advanced Generative AI powers the seamless clothing synthesis feature, backed by PostgreSQL and Prisma ORM.",
       image: belloraImg,
       github: "https://github.com/SenalRidmila/Bellora",
       live: "https://bellora.senalridmila.me"
     },
     {
       title: "Lumière Salon",
-      tech: "Next.js 16, React 19, TypeScript, Tailwind CSS v4",
-      desc: "Lumière Modern Salon is a luxury salon website built with Next.js 16, React 19, TypeScript, and Tailwind CSS v4, featuring booking, portfolio, team, and services sections with elegant animations.",
+      tech: "Next.js 16, Tailwind v4",
+      desc: "Luxury salon website featuring booking, portfolio, team, and elegant modern animations.",
       image: lumiereImg,
       github: "https://github.com/SenalRidmila/lumiere-salon",
       live: "https://l.senalridmila.me"
     },
     {
-      title: "WorkConnect Job Marketplace",
-      tech: "MERN Stack, AWS EC2, Docker, Socket.io",
-      desc: "Built and deployed a MERN stack job marketplace on AWS EC2 using Docker, featuring real-time chat (Socket.io) and production-level security configurations.",
+      title: "WorkConnect",
+      tech: "MERN, Docker, Socket.io",
+      desc: "Job marketplace deployed on AWS EC2 featuring real-time chat via Socket.io.",
       image: workConnectImg,
       github: "https://github.com/SenalRidmila/workconnect-lk",
       live: "https://workconnect.senalridmila.me"
     },
     {
       title: "Pet Toy Shop",
-      tech: "Spring Boot, React, MongoDB, Docker",
-      desc: "A robust full-stack e-commerce platform with DevOps integration and CI/CD pipelines.",
+      tech: "Spring Boot, React",
+      desc: "Full-stack e-commerce platform with deep DevOps integration and CI/CD pipelines.",
       image: petShopImg,
       github: "https://github.com/SenalRidmila/pet-toy-shop-devops",
       live: null
     },
     {
-      title: "Ayurveda Wellness App",
-      tech: "React Native, Firebase, Expo",
+      title: "Ayurveda Wellness",
+      tech: "React Native, Expo",
       desc: "Mobile app connecting patients with Ayurvedic doctors, featuring AI symptom checkers.",
       image: ayurvedaImg,
       github: "https://github.com/SenalRidmila/ayurveda-wellness",
       live: null
     },
     {
-      title: "SLT Tire Management",
-      tech: "React, Spring Boot, Docker",
-      desc: "Interactive tire request system with a Java-powered backend managing request handling.",
-      image: sltTireImg,
-      github: null,
-      live: "https://tire-slt.vercel.app/login"
-    },
-    {
-      title: "Car Rental System",
-      tech: "Java Swing, MySQL, JDBC",
-      desc: "MVC architecture system for managing car rentals, user login, and customer management.",
-      image: carRentalImg,
-      github: "https://github.com/SenalRidmila/Car-Rental-Management-System",
-      live: null
-    },
-    {
-      title: "Virtual Fitting App",
-      tech: "Next.js, Tailwind CSS, TypeScript",
-      desc: "A sleek virtual-fitting app offering real-time UI components and virtual try-on experiences.",
+      title: "Virtual Fitting",
+      tech: "Next.js, TypeScript",
+      desc: "Sleek app offering real-time virtual try-on experiences and high-end UI components.",
       image: virtualFittingImg,
       github: "https://github.com/SenalRidmila/virtual-fitting",
       live: null
     }
   ];
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
-    setIsMenuOpen(false);
-  };
-
-  // --- Tools Functions ---
   const handleImageToPdf = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
     setConvertingImg(true);
-
     const formData = new FormData();
     formData.append("file", file);
-
     try {
       const response = await fetch("https://my-portfolio-backend-mst1.onrender.com/tools/img-to-pdf", {
-        method: "POST",
-        body: formData,
+        method: "POST", body: formData,
       });
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = url;
-        a.download = "converted_image.pdf";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      } else {
-        alert("Conversion failed!");
-      }
+        a.href = url; a.download = "converted_image.pdf";
+        document.body.appendChild(a); a.click(); a.remove();
+      } else alert("Conversion failed!");
     } catch (error) {
-      console.error(error);
       alert("Error connecting to server. Is the backend running?");
     }
     setConvertingImg(false);
@@ -177,43 +131,31 @@ function App() {
     const file = e.target.files[0];
     if (!file) return;
     setConvertingPdf(true);
-
     const formData = new FormData();
     formData.append("file", file);
-
     try {
       const response = await fetch("https://my-portfolio-backend-mst1.onrender.com/tools/pdf-to-word", {
-        method: "POST",
-        body: formData,
+        method: "POST", body: formData,
       });
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = url;
-        a.download = "converted_doc.docx";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      } else {
-        alert("Conversion failed!");
-      }
+        a.href = url; a.download = "converted_doc.docx";
+        document.body.appendChild(a); a.click(); a.remove();
+      } else alert("Conversion failed!");
     } catch (error) {
-      console.error(error);
       alert("Error connecting to server. Is the backend running?");
     }
     setConvertingPdf(false);
   };
 
-  // --- Chat Functions ---
   const handleSendMessage = async () => {
     if (!chatInput.trim()) return;
-
     const newMessages = [...chatMessages, { role: 'user', text: chatInput }];
     setChatMessages(newMessages);
     setChatInput("");
     setIsTyping(true);
-
     try {
       const response = await fetch("https://my-portfolio-backend-mst1.onrender.com/chat", {
         method: "POST",
@@ -228,601 +170,294 @@ function App() {
     setIsTyping(false);
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Shared animation variants for scrolling
+  const slideUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+  
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 font-sans ${isDarkMode ? 'bg-dark text-white' : 'bg-gray-50 text-gray-900'}`}>
-
-      {/* Floating Clouds Page Load Animation */}
-      <motion.div
-        className={`fixed inset-0 z-[100] pointer-events-none flex items-center justify-center overflow-hidden ${isDarkMode ? 'bg-dark' : 'bg-gray-50'}`}
-        initial={{ opacity: 1 }}
-        animate={{ opacity: 0, transitionEnd: { display: "none" } }}
-        transition={{ duration: 0.8, delay: 1.2, ease: "easeInOut" }}
-      >
-        <motion.div
-          className="absolute top-[10%] left-[10%] text-gray-200 dark:text-gray-800"
-          initial={{ x: 0, opacity: 1, scale: 1 }}
-          animate={{ x: "-50vw", opacity: 0, scale: 1.5 }}
-          transition={{ duration: 1.8, ease: "easeInOut" }}
-        >
-          <Cloud size={250} fill="currentColor" />
-        </motion.div>
-
-        <motion.div
-          className="absolute top-[40%] right-[10%] text-blue-100 dark:text-gray-700"
-          initial={{ x: 0, opacity: 1, scale: 1 }}
-          animate={{ x: "50vw", opacity: 0, scale: 1.5 }}
-          transition={{ duration: 2, ease: "easeInOut" }}
-        >
-          <Cloud size={350} fill="currentColor" />
-        </motion.div>
-
-        <motion.div
-          className="absolute bottom-[20%] left-[30%] text-purple-100 dark:text-gray-800"
-          initial={{ x: 0, opacity: 1, scale: 1 }}
-          animate={{ x: "-30vw", y: "20vh", opacity: 0, scale: 1.5 }}
-          transition={{ duration: 2.2, ease: "easeInOut" }}
-        >
-          <Cloud size={200} fill="currentColor" />
-        </motion.div>
-      </motion.div>
-
-      {/* ✅ SEO Meta Tags */}
+    <div className="min-h-screen selection:bg-[#ff5500] selection:text-white pb-24 relative overflow-hidden">
       <Helmet>
-        <title>Senal Ridmila | Full Stack Developer</title>
-        <meta name="description" content="Portfolio of Senal Ridmila - Full Stack Developer from Horizon Campus specializing in React, Spring Boot, and Cloud Technologies. Explore my projects and tools." />
-        <meta name="keywords" content="Senal Ridmila, Web Developer Sri Lanka, Full Stack Developer, React Developer, Spring Boot, Software Engineer, Horizon Campus" />
-        <meta name="author" content="Senal Ridmila" />
-
-        {/* Open Graph / Facebook & LinkedIn */}
-        <meta property="og:title" content="Senal Ridmila | Full Stack Developer" />
-        <meta property="og:description" content="Check out my developer portfolio featuring AI integration and full-stack projects." />
-        <meta property="og:image" content="https://senalridmila.me/assets/profile.webp" />
-        <meta property="og:url" content="https://senalridmila.me" />
-        <meta property="og:type" content="website" />
+        <title>Senal Ridmila | Dev</title>
       </Helmet>
 
-      {/* Navbar */}
-      <nav className={`glass-nav ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div onClick={() => scrollToSection('home')} className="text-xl font-bold flex items-center gap-2 cursor-pointer select-none">
-            <span className="text-blue-500 text-2xl">⚡</span> <span>Senal.dev</span>
-          </div>
-          <ul className={`hidden md:flex gap-8 font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            {['Home', 'About', 'Projects', 'Tools', 'Contact'].map((item) => (
-              <li key={item} onClick={() => scrollToSection(item.toLowerCase())} className={`cursor-pointer hover:text-blue-500 transition relative group`}>
-                {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full"></span>
-              </li>
-            ))}
-          </ul>
-          <div className="flex items-center gap-4">
-            {/* ✅ Added aria-label for Accessibility */}
-            <button
-              aria-label="Toggle Dark Mode"
-              onClick={() => setIsDarkMode(!isDarkMode)}
-              className={`p-2 rounded-full shadow-lg transition transform hover:scale-110 ${isDarkMode ? 'bg-gray-700 text-yellow-400' : 'bg-gray-200 text-gray-800'}`}
-            >
-              {isDarkMode ? '☀' : '🌙'}
-            </button>
-            {/* ✅ Added aria-label for Accessibility */}
-            <button
-              aria-label="Toggle Mobile Menu"
-              className="md:hidden text-2xl"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? '✕' : '☰'}
-            </button>
-          </div>
-        </div>
-        {isMenuOpen && (
-          <div className={`md:hidden p-4 absolute w-full border-b shadow-xl ${isDarkMode ? 'bg-dark border-gray-700' : 'bg-white border-gray-200'}`}>
-            <ul className="flex flex-col gap-4 text-center">
-              {['Home', 'About', 'Projects', 'Tools', 'Contact'].map((item) => (
-                <li key={item} onClick={() => scrollToSection(item.toLowerCase())} className="cursor-pointer hover:text-blue-500 font-medium py-2">{item}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </nav>
-
-      {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-6">
-        <div className="max-w-7xl w-full grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 text-center md:text-left order-2 md:order-1">
-            <motion.h2 initial={{ opacity: 0, y: -20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.5 }} transition={{ duration: 0.5 }} className="text-blue-500 font-bold tracking-wide uppercase">Hello, I'm</motion.h2>
-            <motion.h1 initial={{ opacity: 0, y: -20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.5 }} transition={{ duration: 0.5, delay: 0.1 }} className="text-5xl md:text-7xl font-extrabold leading-tight">{personalInfo.name}</motion.h1>
-            <motion.h3 initial={{ opacity: 0, y: -20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.5 }} transition={{ duration: 0.5, delay: 0.2 }} className={`text-2xl md:text-3xl font-semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Full Stack Developer from Horizon Campus</motion.h3>
-            <div className={`text-lg max-w-lg mx-auto md:mx-0 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.5 }}
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: {
-                    opacity: 1,
-                    transition: { staggerChildren: 0.03 }
-                  }
-                }}
-              >
-                {Array.from("Senal Ridmila is a BSc (Hons) in Network and Mobile Computing Undergraduate at Horizon Campus Sri Lanka. Expert Full Stack Developer specializing in building scalable web solutions with Java, React, Spring Boot, Next.js, and Cloud Technologies.").map((char, index) => (
-                  <motion.span
-                    key={index}
-                    variants={{
-                      hidden: { opacity: 0, y: 10 },
-                      visible: { opacity: 1, y: 0 }
-                    }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-              </motion.div>
-            </div>
-            <motion.div
-              className="flex gap-4 justify-center md:justify-start pt-4 flex-wrap"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: false, amount: 0.5 }}
-              variants={{
-                hidden: { opacity: 0 },
-                show: {
-                  opacity: 1,
-                  transition: { staggerChildren: 0.15, delayChildren: 0.3 }
-                }
-              }}
-            >
-              <motion.a variants={{ hidden: { opacity: 0, y: -20 }, show: { opacity: 1, y: 0 } }} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="/Senal_Ridmila_CV.pdf" download className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-bold hover:from-blue-700 hover:to-purple-700 transition shadow-lg flex items-center gap-2">
-                <span>📄</span> Download CV
-              </motion.a>
-              <motion.button variants={{ hidden: { opacity: 0, y: -20 }, show: { opacity: 1, y: 0 } }} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => scrollToSection('tools')} className="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition shadow-lg">Try My Tools</motion.button>
-              <motion.button variants={{ hidden: { opacity: 0, y: -20 }, show: { opacity: 1, y: 0 } }} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => scrollToSection('contact')} className={`px-8 py-3 rounded-lg font-bold border transition ${isDarkMode ? 'border-white hover:bg-white hover:text-black' : 'border-black hover:bg-black hover:text-white'}`}>Contact Me</motion.button>
-            </motion.div>
-          </div>
-          <div className="flex justify-center order-1 md:order-2">
-            <div className="relative w-72 h-72 md:w-96 md:h-96 group">
-              <div className="absolute inset-0 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-              <img src={profileImg} alt="Senal Ridmila - Full Stack Developer from Horizon Campus Sri Lanka" loading="lazy" className="relative w-full h-full object-cover rounded-full border-4 border-blue-500 shadow-2xl" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Detailed About Section */}
-      <section id="about" className={`py-24 px-6 relative overflow-hidden ${isDarkMode ? 'bg-dark' : 'bg-gray-50'}`}>
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
-        <div className="absolute top-20 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600 inline-block pb-2">
-              About Me
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full mt-2"></div>
-          </div>
-
-          <motion.div
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0.2 }}
-            variants={{
-              hidden: { opacity: 0 },
-              show: {
-                opacity: 1,
-                transition: { staggerChildren: 0.2 }
-              }
-            }}
-          >
-            <motion.div variants={{ hidden: { opacity: 0, x: -50 }, show: { opacity: 1, x: 0, transition: { type: "spring", bounce: 0.4 } } }} className={`p-8 rounded-3xl border backdrop-blur-sm shadow-xl ${isDarkMode ? 'bg-gray-800/40 border-gray-700' : 'bg-white/60 border-gray-200'}`}>
-              <h3 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
-                Who am I?
-              </h3>
-              <p className={`text-lg leading-relaxed mb-6 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                I am <strong>Senal Ridmila</strong>, a <strong>Full Stack Developer</strong> and final year undergraduate at <strong>Horizon Campus Sri Lanka</strong>, driven by a passion for building scalable and robust web solutions. As a Horizon Campus student, I specialize in modern web development technologies.
-              </p>
-              <p className={`text-lg leading-relaxed mb-6 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                My expertise as <strong>Senal Ridmila</strong> lies in bridging the gap between complex backend logic using <strong>Spring Boot & Java</strong> and creating interactive frontend experiences with <strong>React & Next.js</strong>. I thrive in challenging environments and constantly seek to master new technologies like DevOps and Cloud Computing.
-              </p>
-              <div className="flex gap-6 mt-8">
-                <div className="text-center">
-                  <span className="block text-3xl font-bold text-blue-500">5+</span>
-                  <span className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Projects Completed</span>
-                </div>
-                <div className="text-center">
-                  <span className="block text-3xl font-bold text-purple-500">2+</span>
-                  <span className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Years Coding</span>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div variants={{ hidden: { opacity: 0, x: 50 }, show: { opacity: 1, x: 0, transition: { type: "spring", bounce: 0.4 } } }} className="space-y-6">
-              <h3 className={`text-2xl font-bold mb-4 text-center lg:text-left ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
-                Technical Arsenal
-              </h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className={`p-5 rounded-2xl border transition hover:-translate-y-1 ${isDarkMode ? 'bg-gray-800/60 border-gray-700 hover:border-blue-500' : 'bg-white border-gray-200 hover:border-blue-500 shadow-sm'}`}>
-                  <div className="text-blue-500 text-xl mb-2">💻 Frontend</div>
-                  <div className="flex flex-wrap gap-2">
-                    {['React', 'Next.js', 'Tailwind', 'React Native'].map(s => (
-                      <span key={s} className={`text-xs px-2 py-1 rounded ${isDarkMode ? 'bg-blue-900/30 text-blue-300' : 'bg-blue-50 text-blue-700'}`}>{s}</span>
-                    ))}
-                  </div>
-                </div>
-                <div className={`p-5 rounded-2xl border transition hover:-translate-y-1 ${isDarkMode ? 'bg-gray-800/60 border-gray-700 hover:border-purple-500' : 'bg-white border-gray-200 hover:border-purple-500 shadow-sm'}`}>
-                  <div className="text-purple-500 text-xl mb-2">⚙️ Backend</div>
-                  <div className="flex flex-wrap gap-2">
-                    {['Spring Boot', 'Java', 'Node.js', 'PHP'].map(s => (
-                      <span key={s} className={`text-xs px-2 py-1 rounded ${isDarkMode ? 'bg-purple-900/30 text-purple-300' : 'bg-purple-50 text-purple-700'}`}>{s}</span>
-                    ))}
-                  </div>
-                </div>
-                <div className={`p-5 rounded-2xl border transition hover:-translate-y-1 ${isDarkMode ? 'bg-gray-800/60 border-gray-700 hover:border-green-500' : 'bg-white border-gray-200 hover:border-green-500 shadow-sm'}`}>
-                  <div className="text-green-500 text-xl mb-2">🗄️ Data & Cloud</div>
-                  <div className="flex flex-wrap gap-2">
-                    {['MongoDB', 'MySQL', 'Docker', 'Firebase'].map(s => (
-                      <span key={s} className={`text-xs px-2 py-1 rounded ${isDarkMode ? 'bg-green-900/30 text-green-300' : 'bg-green-50 text-green-700'}`}>{s}</span>
-                    ))}
-                  </div>
-                </div>
-                <div className={`p-5 rounded-2xl border transition hover:-translate-y-1 ${isDarkMode ? 'bg-gray-800/60 border-gray-700 hover:border-yellow-500' : 'bg-white border-gray-200 hover:border-yellow-500 shadow-sm'}`}>
-                  <div className="text-yellow-500 text-xl mb-2">🧠 Soft Skills</div>
-                  <div className="flex flex-wrap gap-2">
-                    {['Leadership', 'Teamwork', 'Critical Thinking'].map(s => (
-                      <span key={s} className={`text-xs px-2 py-1 rounded ${isDarkMode ? 'bg-yellow-900/30 text-yellow-300' : 'bg-yellow-50 text-yellow-700'}`}>{s}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600 inline-block pb-2">
-            Featured Projects
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full mt-2"></div>
-        </div>
-
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.1 }}
-          variants={{
-            hidden: { opacity: 0 },
-            show: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.15
-              }
-            }
-          }}
+      {/* Cinematic Page Load Animation */}
+      <motion.div
+        className="fixed inset-0 z-[100] flex items-center justify-center bg-[#09090b]"
+        initial={{ opacity: 1 }}
+        animate={{ opacity: 0, transitionEnd: { display: "none" } }}
+        transition={{ duration: 1, delay: 1.5, ease: "easeInOut" }}
+      >
+        <motion.h1
+          initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="text-5xl md:text-7xl font-black tracking-tighter text-white flex flex-col md:flex-row items-center gap-6"
         >
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              variants={{
-                hidden: { opacity: 0, y: 50, scale: 0.9 },
-                show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4 } }
-              }}
-              className={`group flex flex-col rounded-2xl overflow-hidden transition-colors duration-300 hover:shadow-[0_10px_30px_rgba(59,130,246,0.2)] border ${isDarkMode ? 'bg-card border-gray-700 hover:border-blue-500' : 'bg-white border-gray-200 hover:border-blue-500 shadow-lg'}`}
-            >
-              <div className="h-52 w-full overflow-hidden bg-gray-900 relative">
-                {project.image ? (
-                  <img src={project.image} alt={`${project.title} - Portfolio Project`} loading="lazy" className="w-full h-full object-contain transition duration-500 group-hover:scale-105" />
-                ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center text-gray-500 bg-gray-900">
-                    <span className="text-4xl mb-2">📂</span>
-                    <span className="text-sm">No Image</span>
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition duration-300"></div>
-              </div>
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold mb-2 group-hover:text-blue-500 transition">{project.title}</h3>
-                <p className={`mb-4 text-sm flex-grow leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                  {project.desc}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.split(',').map((tag, i) => (
-                    <span key={i} className={`text-xs px-2 py-1 rounded border font-mono ${isDarkMode ? 'bg-gray-800 border-gray-600 text-blue-300' : 'bg-blue-50 border-blue-100 text-blue-600'}`}>
-                      {tag.trim()}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex gap-3 mt-auto">
-                  {project.github && (
-                    <a href={project.github} target="_blank" rel="noreferrer" className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-semibold border transition ${isDarkMode ? 'border-gray-600 hover:bg-gray-700' : 'border-gray-300 hover:bg-gray-100'}`}>
-                      GitHub
-                    </a>
-                  )}
-                  {project.live && (
-                    <a href={project.live} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 transition shadow-md">
-                      Live Demo
-                    </a>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </section>
+          {/* Using the high-res apple-touch-icon for better crispness */}
+          <img src="/apple-touch-icon.png" alt="Logo" className="w-20 h-20 md:w-24 md:h-24 rounded-[1.25rem] shadow-[0_0_40px_rgba(255,85,0,0.4)]" />
+          <span>SENAL<span className="text-[#ff5500]">.DEV</span></span>
+        </motion.h1>
+      </motion.div>
 
-      {/* Tools Section */}
-      <section id="tools" className={`py-24 px-6 ${isDarkMode ? 'bg-gray-900/50' : 'bg-blue-50'}`}>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600 inline-block pb-2">
-              Developer Tools
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full mt-2"></div>
+      {/* Fixed Navbar */}
+      <nav className="fixed top-0 left-0 w-full z-50 bg-[#09090b]/80 backdrop-blur-md border-b border-zinc-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex justify-between items-center">
+          
+          {/* Left Side: Favicon + Logo Text */}
+          <a href="#home" className="flex items-center gap-3 hover:opacity-80 transition cursor-pointer">
+            <img src="/favicon-32x32.png" alt="Senal.dev Logo" className="w-8 h-8 rounded-lg" />
+            <span className="font-bold text-xl tracking-tight text-white">
+              Senal<span className="text-[#ff5500]">.dev</span>
+            </span>
+          </a>
+
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#experience" className="text-sm font-medium text-zinc-400 hover:text-[#ff5500] transition">Experience</a>
+            <a href="#projects" className="text-sm font-medium text-zinc-400 hover:text-[#ff5500] transition">Projects</a>
+            <a href="#tools" className="text-sm font-medium text-zinc-400 hover:text-[#ff5500] transition">Tools</a>
+            <a href={cvFile} download="Senal-Ridmila.pdf" className="text-sm font-semibold bg-[#ff5500] hover:bg-[#e64d00] text-black px-5 py-2 rounded-full transition flex items-center gap-2 shadow-lg shadow-[#ff5500]/20">
+              Resume <Download size={14} />
+            </a>
           </div>
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0.1 }}
-            variants={{
-              hidden: { opacity: 0 },
-              show: {
-                opacity: 1,
-                transition: { staggerChildren: 0.15 }
-              }
-            }}
-          >
-            <motion.div variants={{ hidden: { opacity: 0, y: 50, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4 } } }} className={`p-8 rounded-2xl border text-center transition hover:-translate-y-2 ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200 shadow-xl'}`}>
-              <div className="text-5xl mb-4">🖼️ ➔ 📄</div>
-              <h3 className="text-2xl font-bold mb-2">Image to PDF</h3>
-              <p className="text-sm text-gray-500 mb-6">Convert your JPG/PNG images into a PDF document instantly.</p>
-              <label className={`block w-full cursor-pointer py-3 rounded-lg border-2 border-dashed ${isDarkMode ? 'border-gray-600 hover:border-blue-500' : 'border-gray-300 hover:border-blue-500'}`}>
-                <span className="text-sm font-semibold">{convertingImg ? "Converting..." : "Upload Image"}</span>
-                <input type="file" accept="image/*" onChange={handleImageToPdf} className="hidden" disabled={convertingImg} />
-              </label>
-            </motion.div>
-            <motion.div variants={{ hidden: { opacity: 0, y: 50, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4 } } }} className={`p-8 rounded-2xl border text-center transition hover:-translate-y-2 ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200 shadow-xl'}`}>
-              <div className="text-5xl mb-4">📄 ➔ 📝</div>
-              <h3 className="text-2xl font-bold mb-2">PDF to Word</h3>
-              <p className="text-sm text-gray-500 mb-6">Extract text from PDF and save as editable Word (Docx) file.</p>
-              <label className={`block w-full cursor-pointer py-3 rounded-lg border-2 border-dashed ${isDarkMode ? 'border-gray-600 hover:border-blue-500' : 'border-gray-300 hover:border-blue-500'}`}>
-                <span className="text-sm font-semibold">{convertingPdf ? "Converting..." : "Upload PDF"}</span>
-                <input type="file" accept=".pdf" onChange={handlePdfToWord} className="hidden" disabled={convertingPdf} />
-              </label>
-            </motion.div>
-            <motion.div variants={{ hidden: { opacity: 0, y: 50, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.4 } } }} className={`p-8 rounded-2xl border text-center transition hover:-translate-y-2 cursor-pointer ${isDarkMode ? 'bg-gradient-to-br from-blue-900 to-gray-800 border-blue-700' : 'bg-gradient-to-br from-blue-100 to-white border-blue-200 shadow-xl'}`} onClick={() => setIsChatOpen(true)}>
-              <div className="text-5xl mb-4">🤖</div>
-              <h3 className="text-2xl font-bold mb-2">AI Assistant</h3>
-              <p className="text-sm opacity-80 mb-6">Ask questions about my projects, skills, or download my resume via AI.</p>
-              <button className="bg-blue-600 text-white px-6 py-2 rounded-full font-bold shadow-lg">Chat Now</button>
-            </motion.div>
-          </motion.div>
+
+          {/* Mobile Menu Toggle */}
+          <button className="md:hidden text-zinc-400 hover:text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
-      </section>
 
-      {/* Premium Contact Section */}
-      <section id="contact" className={`py-32 px-6 relative overflow-hidden ${isDarkMode ? 'bg-dark' : 'bg-gray-50'}`}>
-        {/* Background Decorative Blur */}
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse animation-delay-2000"></div>
-
-        <div className="max-w-4xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: -50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl md:text-6xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 pb-2">
-              Let's Create Together
-            </h2>
-            <p className={`text-lg md:text-xl max-w-2xl mx-auto ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              Ready to turn your vision into reality? I'm currently available for new projects and exciting opportunities. Let's build something extraordinary.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className={`p-8 md:p-12 rounded-[2.5rem] border backdrop-blur-xl shadow-2xl relative overflow-hidden ${isDarkMode ? 'bg-gray-900/40 border-gray-700/50 shadow-blue-900/20' : 'bg-white/60 border-gray-200 shadow-blue-500/10'
-              }`}
-          >
-            {/* Inner Glow */}
-            <div className={`absolute inset-0 bg-gradient-to-b ${isDarkMode ? 'from-white/5 to-transparent' : 'from-black/5 to-transparent'} pointer-events-none`}></div>
-
-            <div className="flex flex-col items-center gap-8 relative z-10">
-
-              {/* Primary Action - CV Download */}
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                href="/SenalRidmila.pdf"
-                download
-                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white px-10 py-5 rounded-full font-bold text-lg shadow-[0_0_40px_rgba(59,130,246,0.4)] flex items-center justify-center gap-3 transition-all ring-2 ring-white/20"
-              >
-                <Download size={24} />
-                Download Full Resume
-              </motion.a>
-
-              {/* Contact Grid layout for Email and WhatsApp */}
-              <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-
-                {/* Email Box */}
-                <motion.a
-                  whileHover={{ y: -5 }}
-                  href={`mailto:${personalInfo.email}`}
-                  className={`flex items-center justify-center sm:justify-start gap-4 p-5 rounded-3xl border transition-all ${isDarkMode ? 'bg-gray-800/50 border-gray-700 hover:border-blue-500/50 hover:bg-gray-800' : 'bg-white border-gray-200 hover:border-blue-400 hover:shadow-lg'
-                    }`}
-                >
-                  <div className="min-w-[48px] h-12 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500">
-                    <Mail size={24} />
-                  </div>
-                  <div className="text-left overflow-hidden">
-                    <div className="text-sm text-gray-400 font-medium">Email Me At</div>
-                    <div className={`font-semibold truncate ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{personalInfo.email}</div>
-                  </div>
-                </motion.a>
-
-                {/* WhatsApp Box (+94771304930) */}
-                <motion.a
-                  whileHover={{ y: -5 }}
-                  href="https://wa.me/94771304930"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`flex items-center justify-center sm:justify-start gap-4 p-5 rounded-3xl border transition-all ${isDarkMode ? 'bg-gray-800/50 border-gray-700 hover:border-green-500/50 hover:bg-gray-800' : 'bg-white border-gray-200 hover:border-green-400 hover:shadow-lg'
-                    }`}
-                >
-                  <div className="min-w-[48px] h-12 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
-                    <WhatsAppIcon size={24} />
-                  </div>
-                  <div className="text-left overflow-hidden">
-                    <div className="text-sm text-gray-400 font-medium">Chat on WhatsApp</div>
-                    <div className={`font-semibold truncate ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>+94 77 130 4930</div>
-                  </div>
-                </motion.a>
-
-              </div>
-
-              {/* Other Socials/Phones Container */}
-              <div className={`w-full pt-8 mt-4 border-t flex flex-wrap items-center justify-center gap-4 ${isDarkMode ? 'border-gray-700/50' : 'border-gray-200'}`}>
-
-                {/* Fallback Phone Call */}
-                <a href="tel:+94781304930" className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-colors ${isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white' : 'bg-white border text-gray-700 hover:bg-gray-50 hover:text-black'
-                  }`}>
-                  <Phone size={16} /> +94 78 130 4930
-                </a>
-
-                {/* LinkedIn */}
-                <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-colors ${isDarkMode ? 'bg-blue-900/40 text-blue-400 hover:bg-blue-900/60 hover:text-white' : 'bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700'
-                  }`}>
-                  <Linkedin size={16} /> LinkedIn
-                </a>
-
-                {/* Facebook */}
-                <a href={personalInfo.facebook} target="_blank" rel="noreferrer" className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-colors ${isDarkMode ? 'bg-blue-900/40 text-blue-400 hover:bg-blue-900/60 hover:text-white' : 'bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700'
-                  }`}>
-                  <Facebook size={16} /> Facebook
-                </a>
-
-              </div>
-            </div>
-          </motion.div>
-
-          <div className="mt-16 text-center">
-            <p className={`font-medium ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-              © 2026 Senal Ridmila. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== FLOATING BUTTON TOOLBAR (right side, stacked vertically) ===== */}
-      <div className="fixed bottom-6 right-4 md:bottom-8 md:right-6 z-50 flex flex-col items-center gap-3">
-
-        {/* Scroll to Top */}
+        {/* Mobile Dropdown */}
         <AnimatePresence>
-          {showScrollTop && (
-            <motion.button
-              aria-label="Scroll to top"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={scrollToTop}
-              className={`p-2.5 md:p-3 rounded-full cursor-pointer shadow-xl border backdrop-blur-md transition-colors ${isDarkMode
-                ? 'bg-gray-800/90 border-gray-700 text-white hover:bg-blue-600'
-                : 'bg-white border-gray-200 text-blue-600 hover:bg-blue-50'
-                }`}
-            >
-              <ArrowUp size={20} />
-            </motion.button>
+          {isMenuOpen && (
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="absolute top-16 left-0 w-full bg-[#09090b] border-b border-zinc-800 md:hidden flex flex-col p-4 shadow-xl">
+              <a href="#experience" onClick={() => setIsMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-zinc-300 hover:bg-zinc-800 rounded-lg">Experience</a>
+              <a href="#projects" onClick={() => setIsMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-zinc-300 hover:bg-zinc-800 rounded-lg">Projects</a>
+              <a href="#tools" onClick={() => setIsMenuOpen(false)} className="px-4 py-3 text-sm font-medium text-zinc-300 hover:bg-zinc-800 rounded-lg">Tools</a>
+              <a href={cvFile} download="Senal-Ridmila.pdf" onClick={() => setIsMenuOpen(false)} className="mt-2 text-sm font-semibold bg-[#ff5500] text-black px-4 py-3 rounded-lg text-center flex items-center justify-center gap-2">
+                Download Resume <Download size={14} />
+              </a>
+            </motion.div>
           )}
         </AnimatePresence>
+      </nav>
 
-        {/* WhatsApp */}
-        <motion.a
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          href="https://wa.me/94771304930"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Chat on WhatsApp"
-          className="relative p-2.5 md:p-3 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-[0_0_16px_rgba(34,197,94,0.45)] flex items-center justify-center w-11 h-11 md:w-12 md:h-12"
-        >
-          <span className="absolute inset-0 rounded-full border-2 border-green-400 animate-ping opacity-40"></span>
-          <WhatsAppIcon size={22} />
-        </motion.a>
+      {/* Main Container */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 pt-24 space-y-6">
+        
+        {/* Section 1: Hero Grid */}
+        <motion.div id="home" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 scroll-mt-24" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={staggerContainer}>
+          
+          {/* Main Hero Intro */}
+          <motion.div variants={slideUp} className="bento-card p-8 lg:p-12 lg:col-span-2 lg:row-span-2 flex flex-col justify-end min-h-[300px] md:min-h-[450px] relative group">
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#ff5500] rounded-full blur-[80px] opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
+            <div className="z-10">
+              <p className="text-zinc-400 font-medium mb-3 tracking-wide uppercase text-sm">Hello, I am</p>
+              <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] text-white">
+                Senal Ridmila
+              </h1>
+              <p className="text-lg text-zinc-400 max-w-md leading-relaxed">
+                A Full Stack Developer from Horizon Campus building exceptional, robust, and scalable digital experiences.
+              </p>
+            </div>
+          </motion.div>
 
-        {/* Chat toggle */}
-        <button
-          aria-label="Toggle Chat Assistant"
-          onClick={() => setIsChatOpen(!isChatOpen)}
-          className="p-2.5 md:p-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white shadow-lg transition-transform hover:scale-110 flex items-center justify-center w-11 h-11 md:w-12 md:h-12 text-xl"
-        >
-          {isChatOpen ? '✕' : '💬'}
+          {/* Profile Image */}
+          <motion.div variants={slideUp} className="bento-card p-0 lg:col-span-1 lg:row-span-2 min-h-[300px] md:min-h-[450px] relative group overflow-hidden">
+             <div className="absolute inset-0 bg-gradient-to-t from-[#18181b] to-transparent z-10 opacity-60"></div>
+             <img src={profileImg} alt="Senal" loading="lazy" className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition duration-700 group-hover:scale-105" />
+          </motion.div>
+
+          {/* Connect / Socials */}
+          <motion.div variants={slideUp} className="bento-card p-8 lg:col-span-1 flex flex-col justify-between group">
+             <h3 className="font-bold text-xl mb-6 text-white">Let's Connect</h3>
+             {/* 3-Column Grid for LinkedIn, Email, WhatsApp */}
+             <div className="grid grid-cols-3 gap-3">
+               <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" className="w-full aspect-square rounded-2xl bg-zinc-800/50 flex flex-col items-center justify-center hover:bg-[#ff5500] hover:text-black transition-all text-zinc-400">
+                 <Linkedin size={22} className="mb-2"/>
+                 <span className="text-[10px] sm:text-xs font-semibold">LinkedIn</span>
+               </a>
+               <a href={`mailto:${personalInfo.email}`} className="w-full aspect-square rounded-2xl bg-zinc-800/50 flex flex-col items-center justify-center hover:bg-[#ff5500] hover:text-black transition-all text-zinc-400">
+                 <Mail size={22} className="mb-2"/>
+                 <span className="text-[10px] sm:text-xs font-semibold">Email</span>
+               </a>
+               <a href="https://wa.me/94771304930" target="_blank" rel="noreferrer" className="w-full aspect-square rounded-2xl bg-zinc-800/50 flex flex-col items-center justify-center hover:bg-[#ff5500] hover:text-black transition-all text-zinc-400">
+                 <WhatsAppIcon size={22} className="mb-2"/>
+                 <span className="text-[10px] sm:text-xs font-semibold">Chat</span>
+               </a>
+             </div>
+          </motion.div>
+
+          {/* Location / Availability */}
+          <motion.div variants={slideUp} className="bento-card p-8 lg:col-span-1 flex flex-col justify-center items-center text-center">
+             <Globe className="text-[#ff5500] mb-3" size={28} />
+             <p className="font-semibold text-lg text-white">Sri Lanka</p>
+             <p className="text-sm text-zinc-400 mt-1 flex items-center gap-2">
+               <span className="w-2 h-2 rounded-full bg-[#ff5500] animate-pulse"></span> Available for work
+             </p>
+          </motion.div>
+
+        </motion.div>
+
+        {/* Section 2: Experience & Skills Grid */}
+        <motion.div id="experience" className="grid grid-cols-1 lg:grid-cols-3 gap-6 scroll-mt-24" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={staggerContainer}>
+          
+          {/* Work Experience */}
+          <motion.div variants={slideUp} className="bento-card p-8 lg:p-10 lg:col-span-2">
+             <h2 className="text-2xl font-bold mb-8 flex items-center gap-3 text-white"><Briefcase className="text-[#ff5500]"/> Work Experience</h2>
+             
+             <div className="border-l-2 border-zinc-800 pl-6 relative ml-2 group">
+                <span className="absolute -left-[9px] top-1.5 w-4 h-4 bg-[#ff5500] rounded-full shadow-[0_0_10px_#ff5500]"></span>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+                  <h3 className="text-xl font-bold text-white group-hover:text-[#ff5500] transition">Software Engineering Intern</h3>
+                  <span className="text-sm font-mono text-zinc-500 bg-zinc-800/50 px-3 py-1 rounded-full w-fit mt-2 sm:mt-0">Apr 2025 – Oct 2025</span>
+                </div>
+                <p className="text-zinc-400 font-medium text-sm mb-6 uppercase tracking-widest">Sri Lanka Telecom</p>
+                <ul className="space-y-4 text-zinc-300 text-[15px] leading-relaxed">
+                   <li className="flex items-start gap-3">
+                     <span className="text-[#ff5500] mt-1">✦</span>
+                     Developed a full-stack Tire Management System using React 18 (Material UI) and Spring Boot (Java 17) with MongoDB REST APIs.
+                   </li>
+                   <li className="flex items-start gap-3">
+                     <span className="text-[#ff5500] mt-1">✦</span>
+                     Implemented secure authentication integrating Azure AD Single Sign-On (SSO) alongside a custom MongoDB fallback.
+                   </li>
+                   <li className="flex items-start gap-3">
+                     <span className="text-[#ff5500] mt-1">✦</span>
+                     Built role-based dashboards with dynamic filtering and deployed the frontend on Vercel while managing the Render backend.
+                   </li>
+                </ul>
+             </div>
+          </motion.div>
+
+          {/* Tech Stack */}
+          <motion.div variants={slideUp} className="bento-card p-8 lg:p-10 lg:col-span-1 flex flex-col">
+             <h2 className="text-2xl font-bold mb-8 flex items-center gap-3 text-white"><Code className="text-[#ff5500]"/> Tech Stack</h2>
+             <div className="flex flex-wrap gap-2.5 flex-grow content-start">
+                {['React', 'Next.js', 'Spring Boot', 'Java', 'Tailwind CSS', 'MongoDB', 'PostgreSQL', 'Docker', 'AWS', 'Node.js', 'React Native'].map(t => (
+                   <span key={t} className="px-4 py-2 bg-zinc-900 rounded-xl text-sm font-medium text-zinc-300 border border-zinc-800 hover:border-[#ff5500] hover:text-white transition cursor-default">
+                     {t}
+                   </span>
+                ))}
+             </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Section 3: Projects Grid */}
+        <div id="projects" className="scroll-mt-24">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="pb-6">
+            <h2 className="text-3xl font-extrabold text-white">Selected Works</h2>
+          </motion.div>
+          
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={staggerContainer}>
+            {projects.map((project, index) => (
+               <motion.div key={index} variants={slideUp} className="bento-card flex flex-col h-full group">
+                  <div className="h-56 overflow-hidden relative">
+                     {project.image ? (
+                       <img src={project.image} alt={project.title} loading="lazy" className="w-full h-full object-cover transition duration-700 group-hover:scale-105 group-hover:opacity-80" />
+                     ) : (
+                       <div className="w-full h-full bg-zinc-800/50 flex items-center justify-center"><ImageIcon className="text-zinc-600" size={40}/></div>
+                     )}
+                     <div className="absolute inset-0 bg-gradient-to-t from-[#18181b] via-transparent to-transparent opacity-90"></div>
+                  </div>
+                  <div className="p-6 flex flex-col flex-grow relative z-10 -mt-10">
+                     <h3 className="text-2xl font-bold mb-2 group-hover:text-[#ff5500] transition text-white drop-shadow-md">{project.title}</h3>
+                     <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tech.split(',').map((tag, i) => (
+                          <span key={i} className="text-[11px] uppercase tracking-wider font-semibold text-zinc-400 bg-zinc-950/80 px-2 py-1 rounded">{tag.trim()}</span>
+                        ))}
+                     </div>
+                     <p className="text-sm text-zinc-400 mb-8 flex-grow leading-relaxed">{project.desc}</p>
+                     <div className="flex gap-3 mt-auto">
+                       {project.github && <a href={project.github} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-semibold rounded-xl text-sm transition"><Github size={16}/> Repo</a>}
+                       {project.live && <a href={project.live} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-[#ff5500] hover:bg-[#e64d00] text-black font-bold rounded-xl text-sm transition shadow-lg shadow-[#ff5500]/20"><ExternalLink size={16}/> Live</a>}
+                     </div>
+                  </div>
+               </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Section 4: Utilities */}
+        <motion.div id="tools" className="grid grid-cols-1 md:grid-cols-2 gap-6 scroll-mt-24" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
+           
+           <motion.div variants={slideUp} className="bento-card p-8 flex items-center gap-6 group hover:border-[#ff5500] transition">
+              <div className="w-16 h-16 rounded-2xl bg-zinc-800 flex items-center justify-center shrink-0 group-hover:bg-[#ff5500] group-hover:text-black transition">
+                <FileText size={28} />
+              </div>
+              <div className="flex-1">
+                 <h4 className="font-bold text-xl mb-1 text-white">Image to PDF</h4>
+                 <p className="text-sm text-zinc-400 mb-3">Convert images to a PDF securely.</p>
+                 <label className="inline-block bg-zinc-800 hover:bg-zinc-700 px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer transition text-white">
+                   {convertingImg ? "Converting..." : "Upload File"}
+                   <input type="file" accept="image/*" onChange={handleImageToPdf} className="hidden" disabled={convertingImg} />
+                 </label>
+              </div>
+           </motion.div>
+
+           <motion.div variants={slideUp} className="bento-card p-8 flex items-center gap-6 group hover:border-[#ff5500] transition">
+              <div className="w-16 h-16 rounded-2xl bg-zinc-800 flex items-center justify-center shrink-0 group-hover:bg-[#ff5500] group-hover:text-black transition">
+                <FileText size={28} />
+              </div>
+              <div className="flex-1">
+                 <h4 className="font-bold text-xl mb-1 text-white">PDF to Word</h4>
+                 <p className="text-sm text-zinc-400 mb-3">Extract text from PDF documents.</p>
+                 <label className="inline-block bg-zinc-800 hover:bg-zinc-700 px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer transition text-white">
+                   {convertingPdf ? "Converting..." : "Upload File"}
+                   <input type="file" accept=".pdf" onChange={handlePdfToWord} className="hidden" disabled={convertingPdf} />
+                 </label>
+              </div>
+           </motion.div>
+
+        </motion.div>
+
+      </main>
+
+      {/* Floating Chat Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <button onClick={() => setIsChatOpen(!isChatOpen)} className="w-14 h-14 rounded-full bg-[#ff5500] hover:bg-[#e64d00] text-black shadow-[0_0_20px_rgba(255,85,0,0.3)] hover:scale-110 transition flex items-center justify-center">
+          {isChatOpen ? <X size={26}/> : <MessageCircle size={26}/>}
         </button>
       </div>
 
       {/* Chatbot Window */}
       <AnimatePresence>
         {isChatOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.25 }}
-            className={`fixed bottom-32 right-4 md:bottom-36 md:right-6 z-50 w-[calc(100vw-2rem)] sm:w-80 md:w-96 rounded-2xl shadow-2xl overflow-hidden flex flex-col border ${isDarkMode ? 'bg-card border-gray-700' : 'bg-white border-gray-200'
-              }`}
-          >
-            <div className="bg-blue-600 p-3 md:p-4 text-white font-bold flex justify-between items-center">
-              <span>🤖 Senal's AI</span>
-              <button aria-label="Close Chat" onClick={() => setIsChatOpen(false)}>✕</button>
+          <motion.div initial={{ opacity: 0, y: 20, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 20, scale: 0.95 }} className="fixed bottom-24 right-6 z-50 w-[calc(100vw-2rem)] sm:w-[380px] rounded-3xl bento-card shadow-2xl flex flex-col border border-zinc-800">
+            <div className="bg-zinc-900 border-b border-zinc-800 p-4 text-white font-bold flex justify-between items-center">
+              <span className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-[#ff5500] animate-pulse"></div> Senal's AI</span>
+              <button onClick={() => setIsChatOpen(false)} className="hover:text-[#ff5500] transition"><X size={20}/></button>
             </div>
-            <div className={`h-[45vh] sm:h-72 p-4 overflow-y-auto space-y-3 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
-              }`}>
+            <div className="h-[40vh] p-5 overflow-y-auto space-y-4 custom-scrollbar bg-[#09090b]">
               {chatMessages.map((msg, i) => (
-                <div key={i} className={`p-3 rounded-lg max-w-[85%] text-sm ${msg.role === 'user'
-                  ? 'bg-blue-600 text-white self-end ml-auto rounded-br-none'
-                  : 'bg-gray-700 text-gray-200 self-start rounded-tl-none'
-                  }`}>
+                <div key={i} className={`p-3.5 rounded-2xl max-w-[85%] text-[14px] leading-relaxed shadow-sm ${msg.role === 'user' ? 'bg-[#ff5500] text-black self-end ml-auto rounded-br-sm font-medium' : 'bg-zinc-800 text-white self-start rounded-tl-sm'}`}>
                   {msg.text}
                 </div>
               ))}
               {isTyping && (
-                <div className="p-3 rounded-lg max-w-[85%] bg-gray-700 text-gray-200 self-start rounded-tl-none flex items-center gap-2">
-                  <span className="text-sm">AI is typing</span>
-                  <div className="flex gap-1">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                    <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                    <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
-                  </div>
+                <div className="bg-zinc-800 p-4 rounded-2xl self-start rounded-tl-sm flex items-center gap-2 w-16">
+                  <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                  <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                  <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
                 </div>
               )}
             </div>
-            <div className={`p-3 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+            <div className="p-3 border-t border-zinc-800 bg-zinc-900">
               <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={chatInput}
-                  onChange={(e) => setChatInput(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                  placeholder="Ask something..."
-                  className={`flex-1 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 ${isDarkMode ? 'bg-gray-800 border-gray-600 text-white' : 'bg-white border-gray-300'
-                    }`}
-                />
-                <button aria-label="Send Message" onClick={handleSendMessage} className="bg-blue-600 text-white p-2 rounded-lg">➤</button>
+                <input type="text" value={chatInput} onChange={(e) => setChatInput(e.target.value)} onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()} placeholder="Ask something..." className="flex-1 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#ff5500] focus:ring-1 focus:ring-[#ff5500] bg-zinc-950 border border-zinc-800 text-white transition-all" />
+                <button onClick={handleSendMessage} className="bg-zinc-800 hover:bg-[#ff5500] hover:text-black text-white p-3 rounded-xl transition shadow-md"><Send size={18}/></button>
               </div>
             </div>
           </motion.div>
