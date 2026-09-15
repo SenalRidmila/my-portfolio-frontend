@@ -55,6 +55,8 @@ function App() {
       widget.bind(window.SC.Widget.Events.READY, () => {
         widget.setVolume(15); // Set to 15% for low volume
         setIsMusicReady(true);
+        // Attempt to auto-play track once ready
+        widget.play();
       });
       
       widget.bind(window.SC.Widget.Events.PLAY, () => setIsPlaying(true));
@@ -431,43 +433,6 @@ function App() {
           </motion.div>
           
           <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
-             
-             {/* Music Player Bento */}
-             <motion.div variants={slideUp} className="bento-card p-8 flex flex-col justify-center group hover:border-[#ff5500] transition relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-[#ff5500]/10 rounded-full blur-3xl group-hover:bg-[#ff5500]/20 transition duration-700"></div>
-                
-                <div className="flex items-center gap-4 z-10">
-                   <div className="w-16 h-16 rounded-2xl bg-zinc-800 flex items-center justify-center shrink-0 group-hover:bg-[#ff5500] group-hover:text-black transition relative overflow-hidden">
-                     <Music size={28} className={isPlaying ? "text-[#ff5500] animate-bounce" : "text-zinc-400 group-hover:text-black"} />
-                   </div>
-                   <div className="flex-1 min-w-0">
-                      <h4 className="font-bold text-lg mb-1 text-white truncate">My Track</h4>
-                      <p className="text-sm text-zinc-400 mb-3 truncate">Zena - Across The Canopy</p>
-                      
-                      <div className="flex gap-2">
-                        <button onClick={togglePlay} className="inline-flex items-center justify-center gap-2 bg-zinc-800 hover:bg-[#ff5500] hover:text-black px-4 py-2 rounded-lg text-sm font-semibold transition text-white flex-1">
-                          {isPlaying ? <Pause size={16} /> : <Play size={16} className="ml-0.5" />} 
-                          {isPlaying ? "Pause" : "Play"}
-                        </button>
-                        <a href="https://soundcloud.com/senal-ridmila" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 bg-[#ff5500] hover:bg-[#e64d00] text-black px-4 py-2 rounded-lg text-sm font-bold transition shadow-lg shadow-[#ff5500]/20 flex-1">
-                          <ExternalLink size={16} /> Profile
-                        </a>
-                      </div>
-                   </div>
-                </div>
-
-                {/* Hidden SoundCloud Iframe for API */}
-                <iframe 
-                  id="sc-widget"
-                  width="100%" 
-                  height="20" 
-                  scrolling="no" 
-                  frameBorder="no" 
-                  allow="autoplay" 
-                  className="hidden"
-                  src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/senal-ridmila/zena-across-the-canopy&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
-                ></iframe>
-             </motion.div>
 
              {/* Utility 1 */}
              <motion.div variants={slideUp} className="bento-card p-8 flex items-center gap-6 group hover:border-[#ff5500] transition">
@@ -503,6 +468,14 @@ function App() {
         </div>
 
       </main>
+
+      {/* Footer */}
+      <footer className="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-zinc-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-zinc-500 relative z-10">
+        <p className="text-sm">© {new Date().getFullYear()} Senal Ridmila. All rights reserved.</p>
+        <a href="https://soundcloud.com/senal-ridmila" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-semibold hover:text-[#ff5500] transition">
+           <Music size={16} /> Explore my Music on SoundCloud
+        </a>
+      </footer>
 
       {/* Floating Chat Button */}
       <div className="fixed bottom-6 right-6 z-50">
@@ -541,6 +514,40 @@ function App() {
             </div>
           </motion.div>
         )}
+      </AnimatePresence>
+
+      {/* Floating Music Mini Player */}
+      <AnimatePresence>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ delay: 1.5, duration: 0.6 }}
+          className="fixed bottom-6 left-4 sm:left-6 z-50 flex items-center gap-3 bg-[#09090b]/90 backdrop-blur-md p-3 rounded-2xl border border-zinc-800 shadow-2xl hover:border-[#ff5500]/50 transition group"
+        >
+          <div className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center shrink-0 relative overflow-hidden">
+            <div className="absolute inset-0 bg-[#ff5500]/20 mix-blend-overlay"></div>
+            <Music size={18} className={isPlaying ? "text-[#ff5500] animate-pulse" : "text-zinc-400 group-hover:text-white"} />
+          </div>
+          <div className="flex flex-col justify-center pr-2">
+             <p className="text-white text-xs font-bold w-32 sm:w-40 truncate">Zena - Across The Canopy</p>
+             <a href="https://soundcloud.com/senal-ridmila" target="_blank" rel="noreferrer" className="text-zinc-500 text-[10px] hover:text-[#ff5500] transition w-fit">Senal Ridmila</a>
+          </div>
+          <button onClick={togglePlay} className={`w-9 h-9 shrink-0 rounded-full flex items-center justify-center transition shadow-lg ${isPlaying ? 'bg-[#ff5500] text-black' : 'bg-zinc-800 text-white hover:bg-[#ff5500] hover:text-black'}`}>
+             {isPlaying ? <Pause size={14} /> : <Play size={14} className="ml-0.5" />}
+          </button>
+          
+          {/* Hidden SoundCloud Iframe for API */}
+          <iframe 
+            id="sc-widget"
+            width="100%" 
+            height="20" 
+            scrolling="no" 
+            frameBorder="no" 
+            allow="autoplay" 
+            className="hidden"
+            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/senal-ridmila/zena-across-the-canopy&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+          ></iframe>
+        </motion.div>
       </AnimatePresence>
 
     </div>
