@@ -226,11 +226,26 @@ function App() {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      {/* Navbar */}
-      <nav className={`glass-nav ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div onClick={() => scrollToSection('home')} className="text-xl font-bold flex items-center gap-2 cursor-pointer select-none">
-            <span className="text-blue-500 text-2xl">⚡</span> <span>Senal.dev</span>
+      {/* Fixed Navbar */}
+      <nav className="fixed top-0 left-0 w-full z-50 bg-[#09090b]/80 backdrop-blur-md border-b border-zinc-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex justify-between items-center">
+          
+          {/* Left Side: Favicon + Logo Text */}
+          <a href="#home" className="flex items-center gap-3 hover:opacity-80 transition cursor-pointer">
+            <img src="/favicon-32x32.png" alt="Senal.dev Logo" className="w-8 h-8 rounded-lg" />
+            <span className="font-bold text-xl tracking-tight text-white">
+              Senal<span className="text-[#ff5500]">.dev</span>
+            </span>
+          </a>
+
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#experience" className="text-sm font-medium text-zinc-400 hover:text-[#ff5500] transition">Experience</a>
+            <a href="#projects" className="text-sm font-medium text-zinc-400 hover:text-[#ff5500] transition">Projects</a>
+            <a href="#tools" className="text-sm font-medium text-zinc-400 hover:text-[#ff5500] transition">Tools</a>
+            <a href={cvFile} download="Senal-Ridmila.pdf" className="text-sm font-semibold bg-[#ff5500] hover:bg-[#e64d00] text-black px-5 py-2 rounded-full transition flex items-center gap-2 shadow-lg shadow-[#ff5500]/20">
+              Resume <Download size={14} />
+            </a>
           </div>
 
           {/* Mobile Menu Toggle */}
